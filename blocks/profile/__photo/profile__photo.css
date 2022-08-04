@@ -1,0 +1,6 @@
+.profile__photo {
+    max-width: 160px;
+    max-height: 125px;
+    border-radius: 50%;
+    margin-right: 24px;
+}

@@ -1,0 +1,14 @@
+.profile__edit-button {
+    max-width: 24px;
+    max-height: 24px;
+    box-sizing: border-box;
+    height: 100%;
+    grid-row: 1;
+    grid-column: 2;
+    border: 1px solid #FFFFFF;
+    background-image: url("../../../images/vector-edit-button.svg");
+    background-size: auto;
+    background-position: center;
+    background-repeat: no-repeat;
+    align-self: end;
+}

@@ -1,0 +1,16 @@
+.profile__add-button {
+    max-width: 150px;
+    box-sizing: border-box;
+    max-height: 50px;
+    width: 100%;
+    text-decoration: none;
+    color: white;
+    border: 2px solid #FFFFFF;
+    border-radius: 2px;
+    background-size: auto;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url("../../../images/vector-add-button.svg");
+    justify-self: end;
+    margin: 35px 0;
+}
