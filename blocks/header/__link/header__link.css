@@ -1,0 +1,7 @@
+.header__link {
+    display: flex;
+    color: white;
+    text-decoration: none;
+    max-width: 142px;
+    margin: 0 0 41px;
+}
