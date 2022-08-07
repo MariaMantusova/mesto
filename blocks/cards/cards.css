@@ -6,4 +6,19 @@
     max-width: 880px;
     margin: 0 auto;
     padding: 46px 0 0;
+    justify-content: center;
+}
+
+@media screen and (max-width: 880px) {
+    .cards {
+        max-width: 650px;
+        padding: 35px 0 0;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .cards {
+        max-width: 320px;
+        padding: 5px 0 0;
+    }
 }

@@ -8,3 +8,22 @@
     max-height: 73px;
     align-self: center;
 }
+
+@media screen and (max-width: 880px) {
+    .profile__info {
+        gap: 8px;
+        grid-template-rows: 30px 18px;
+        grid-template-columns: 230px 24px;
+    }
+}
+
+
+@media screen and (max-width: 650px) {
+    .profile__info {
+        row-gap: 14px;
+        column-gap: 10px;
+        max-width: 282px;
+        grid-template-columns: 215px 18px;
+        text-align: end;
+    }
+}

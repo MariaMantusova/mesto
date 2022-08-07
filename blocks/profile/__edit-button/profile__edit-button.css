@@ -13,3 +13,10 @@
     align-self: end;
     background-color: black;
 }
+
+@media screen and (max-width: 650px) {
+    .profile__edit-button {
+        max-width: 18px;
+        max-height: 18px;
+    }
+}
