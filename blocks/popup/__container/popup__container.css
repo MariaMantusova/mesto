@@ -1,0 +1,8 @@
+.popup__container {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    max-width: 510px;
+    width: 100%;
+    margin-top: 155px;
+}
