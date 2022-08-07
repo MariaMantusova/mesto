@@ -6,3 +6,10 @@
     width: 100%;
     margin-top: 155px;
 }
+
+@media screen and (max-width: 650px) {
+    .popup__container {
+        max-width: 282px;
+        margin-top: 87px;
+    }
+}

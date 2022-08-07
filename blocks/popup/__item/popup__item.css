@@ -11,3 +11,9 @@
     line-height: 1.2;
     color: black;
 }
+
+@media screen and (max-width: 650px) {
+    .popup__item {
+        margin-top: 35px;
+    }
+}

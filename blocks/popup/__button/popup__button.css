@@ -11,4 +11,15 @@
     border-radius: 2px;
     padding: 0;
     margin-top: 48px;
+    font-size: 18px;
+    line-height: 1.2;
+}
+
+@media screen and (max-width: 650px) {
+    .popup__button {
+        margin-top: 41px;
+        min-height: 46px;
+        max-width: 238px;
+        font-size: 14px;
+    }
 }
