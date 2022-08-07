@@ -12,6 +12,11 @@
     background-repeat: no-repeat;
     align-self: end;
     background-color: black;
+    transition: opacity 0.4s ease-in-out;
+}
+
+.profile__edit-button:hover {
+    opacity: 0.6;
 }
 
 @media screen and (max-width: 650px) {
