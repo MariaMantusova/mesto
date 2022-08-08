@@ -17,4 +17,4 @@
 * БЭМ структура
 _____
 
-* [Ссылка на gh-pages]()
+* [Ссылка на gh-pages](https://mariamantusova.github.io/mesto/)
