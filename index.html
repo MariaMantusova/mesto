@@ -6,13 +6,12 @@
     <link rel="stylesheet" href="./pages/index.css">
     <title>Место</title>
 </head>
-<body class="root">
+<body>
 <div class="page">
     <header class="header">
         <a href="#" class="header__link">
             <img src="./images/header-logo.svg" alt="Логотип сайта" class="header__logo">
         </a>
-        <div class="header__line"></div>
     </header>
     <main class="main">
         <section class="profile">
@@ -20,51 +19,51 @@
             <div class="profile__info">
                 <h1 class="profile__name">Жак Ив Кусто</h1>
                 <p class="profile__description">Исследователь океана</p>
-                <button class="profile__edit-button"></button>
+                <button type="button" class="profile__edit-button"></button>
             </div>
-            <button class="profile__add-button"></button>
+            <button type="button" class="profile__add-button"></button>
         </section>
         <section class="cards">
             <article class="card">
                 <img class="card__image" src="./images/cards-karachaevsk.jpg" alt="Карачаевск">
                 <div class="card__info">
                     <h2 class="card__title">Карачаевск</h2>
-                    <button class="card__like"></button>
+                    <button type="button" class="card__like card__like_active"></button>
                 </div>
             </article>
             <article class="card">
                 <img class="card__image" src="./images/cards-elbrus.jpg" alt="Эльбрус">
                 <div class="card__info">
                     <h2 class="card__title">Гора Эльбрус</h2>
-                    <button class="card__like card__like_active"></button>
+                    <button type="button" class="card__like card__like_active"></button>
                 </div>
             </article>
             <article class="card">
                 <img class="card__image" src="./images/cards-dombai.jpg" alt="Домбай">
                 <div class="card__info">
                     <h2 class="card__title">Домбай</h2>
-                    <button class="card__like"></button>
+                    <button type="button" class="card__like card__like_active"></button>
                 </div>
             </article>
             <article class="card">
                 <img class="card__image" src="./images/cards-elbrus.jpg" alt="Эльбрус">
                 <div class="card__info">
                     <h2 class="card__title">Гора Эльбрус</h2>
-                    <button class="card__like"></button>
+                    <button type="button" class="card__like card__like_active"></button>
                 </div>
             </article>
             <article class="card">
                 <img class="card__image" src="./images/cards-dombai.jpg" alt="Домбай">
                 <div class="card__info">
                     <h2 class="card__title">Домбай</h2>
-                    <button class="card__like"></button>
+                    <button type="button" class="card__like card__like_active"></button>
                 </div>
             </article>
             <article class="card">
                 <img class="card__image" src="./images/cards-karachaevsk.jpg" alt="Карачаево-Черкесия">
                 <div class="card__info">
                     <h2 class="card__title">Карачаево-Черкесия</h2>
-                    <button class="card__like"></button>
+                    <button type="button" class="card__like card__like_active"></button>
                 </div>
             </article>
         </section>
@@ -76,18 +75,16 @@
 
 <section class="popup popup_opened">
     <div class="popup__container">
-        <button class="popup__button-close"></button>
-        <div class="popup__main-container">
-            <h2 class="popup__title">Редактировать профиль</h2>
+        <button type="button" class="popup__button-close"></button>
             <form class="popup__form">
+                <h2 class="popup__title">Редактировать профиль</h2>
                 <input type="text" name="name" class="popup__item popup__item_el_name" placeholder="Имя пользователя">
                 <input type="text" name="job" class="popup__item popup__item_el_job" placeholder="Род деятельности">
-                <button class="popup__button">Сохранить</button>
+                <button type="button" class="popup__button">Сохранить</button>
             </form>
-        </div>
     </div>
 </section>
 
-<script src="pages/index.js"></script>
+<script src="./scripts/index.js"></script>
 </body>
 </html>

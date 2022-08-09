@@ -5,6 +5,7 @@
     max-width: 510px;
     width: 100%;
     margin-top: 155px;
+    z-index: 1;
 }
 
 @media screen and (max-width: 650px) {

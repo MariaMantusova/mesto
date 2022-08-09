@@ -9,4 +9,7 @@
     -ms-text-size-adjust: 100%;
     -moz-text-size-adjust: 100%;
     text-rendering: optimizeLegibility;
+    background-color: #000000;
+    font-family: Inter, Arial, sans-serif;
+    color: #FFFFFF;
 }

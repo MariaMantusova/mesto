@@ -4,7 +4,6 @@
     min-height: 50px;
     background-color: black;
     color: #FFFFFF;
-    display: flex;
     justify-content: center;
     align-items: center;
     border: 0;
@@ -14,6 +13,8 @@
     font-size: 18px;
     line-height: 1.2;
     transition:  opacity 0.4s ease-in-out;
+    cursor: pointer;
+    align-self: center;
 }
 
 .popup__button:hover {
