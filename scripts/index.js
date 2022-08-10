@@ -26,6 +26,9 @@ function changeInfo() {
 editButton.addEventListener('click', openPopup);
 closeButton.addEventListener('click', closePopup);
 saveButton.addEventListener('click', changeInfo);
-
-
-
+document.addEventListener('keypress', function(event) {
+    if (event.key === "Enter") {
+        changeInfo();
+        saveButton.click();
+    }
+});
