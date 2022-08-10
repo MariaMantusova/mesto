@@ -10,7 +10,7 @@
     background-size: auto;
     background-position: center;
     background-repeat: no-repeat;
-    align-self: end;
+    align-self:center;
     background-color: black;
     transition: opacity 0.4s ease-in-out;
     cursor: pointer;
