@@ -7,6 +7,7 @@ let profileName = popup.querySelector('.popup__item_el_name');
 let profileJob = popup.querySelector('.popup__item_el_job');
 let profileNameField = main.querySelector('.profile__name');
 let profileJobField = main.querySelector('.profile__description');
+let form = popup.querySelector('.popup__form')
 
 function openPopup() {
     popup.classList.add('popup_opened');
@@ -16,19 +17,14 @@ function closePopup() {
     popup.classList.remove('popup_opened');
 }
 
-function changeInfo() {
+function changeInfo(evt) {
     profileNameField.innerHTML = profileName.value;
     profileJobField.innerHTML = profileJob.value;
 
     closePopup();
+    evt.preventDefault();
 }
 
 editButton.addEventListener('click', openPopup);
 closeButton.addEventListener('click', closePopup);
-saveButton.addEventListener('click', changeInfo);
-document.addEventListener('keypress', function(event) {
-    if (event.key === "Enter") {
-        changeInfo();
-        saveButton.click();
-    }
-});
+form.addEventListener('submit', changeInfo);

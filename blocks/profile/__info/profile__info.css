@@ -1,11 +1,10 @@
 .profile__info {
     display: grid;
-    grid-template-rows: 50px 18px;
-    grid-template-columns: 294px 24px;
+    grid-template-rows: repeat(auto-fit, minmax(20px, max-content));
+    grid-template-columns: repeat(2, minmax(24px, max-content));
     row-gap: 7px;
-    column-gap: 18px;
+    column-gap: 20px;
     max-width: 336px;
-    max-height: 73px;
     align-self: center;
 }
 
@@ -23,7 +22,9 @@
         row-gap: 14px;
         column-gap: 10px;
         max-width: 282px;
-        grid-template-columns: 215px 18px;
-        text-align: end;
+        justify-items: center;
+        grid-template-columns: repeat(2, minmax(18px, max-content));
+        margin-left: 25px;
+        text-align: center;
     }
 }

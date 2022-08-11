@@ -13,6 +13,5 @@
 @media screen and (max-width: 650px) {
     .profile__description {
         font-size: 14px;
-        margin-right: 14px;
     }
 }
