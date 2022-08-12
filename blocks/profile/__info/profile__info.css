@@ -22,7 +22,6 @@
         row-gap: 14px;
         column-gap: 10px;
         max-width: 282px;
-        justify-items: center;
         grid-template-columns: repeat(2, minmax(18px, max-content));
         margin-left: 25px;
         text-align: center;
