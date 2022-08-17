@@ -5,4 +5,5 @@
     min-height: 361px;
     color: black;
     overflow: hidden;
+    position: relative;
 }
