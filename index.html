@@ -56,10 +56,16 @@
         </div>
     </section>
 
-    <section class="popup">
-        <div class="popup__container">
-        </div>
+    <section class="popup popup_theme_image popup_opened">
     </section>
+
+    <template id="big-image">
+        <figure class="popup__image-container">
+            <button type="button" class="popup__button-close popup__button-close_theme_image"></button>
+            <img class="popup__image">
+            <figcaption class="popup__caption"></figcaption>
+        </figure>
+    </template>
 
     <template id="card">
         <article class="card">
@@ -70,14 +76,6 @@
                 <button type="button" class="card__like"></button>
             </div>
         </article>
-    </template>
-
-    <template id="big-image">
-        <button type="button" class="popup__button-close"></button>
-        <figure class="popup__figure">
-            <img>
-            <figcaption></figcaption>
-        </figure>
     </template>
 </div>
 
