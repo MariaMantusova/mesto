@@ -15,9 +15,10 @@ const popupProfileInfo = document.querySelector('.popup_theme_profile-info');
 const popupAddCard = document.querySelector('.popup_theme_add-card');
 const cardTitle = document.querySelector('.popup__item_el_title');
 const cardImage = document.querySelector('.popup__item_el_image');
-// const popupImage = document.querySelector('.popup_theme_image');
-// const cardTitleField =  cardTemplate.querySelector('.card__title');
-// const image = cardTemplate.querySelector('.card__image');
+const popupThemeImage = document.querySelector('.popup_theme_image');
+const closeButtonImage = document.querySelector('.popup__button-close_theme_image');
+const popupImage = document.querySelector('.popup__image');
+const popupCaption = document.querySelector('.popup__caption');
 
 const initialCards = [
     {
