@@ -99,8 +99,8 @@ function addCard(evt) {
 }
 
 function changeInfo(evt) {
-    profileNameField.innerHTML = profileName.value;
-    profileJobField.innerHTML = profileJob.value;
+    profileNameField.textContent = profileName.value;
+    profileJobField.textContent = profileJob.value;
 
     openOrClosePopupProfileInfo();
     evt.preventDefault();
