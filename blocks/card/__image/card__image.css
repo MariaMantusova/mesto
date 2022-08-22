@@ -1,8 +1,9 @@
 .card__image {
-    max-width: 282px;
-    max-height: 282px;
-    height: 100%;
-    width: 100%;
+    width: 282px;
+    height: 282px;
     object-fit: cover;
     cursor: pointer;
+    background-color: black;
+    color: #FFFFFF;
+    background-size: cover;
 }

@@ -6,7 +6,7 @@ const profileJob = document.querySelector('.popup__item_el_job');
 const profileNameField = document.querySelector('.profile__name');
 const profileJobField = document.querySelector('.profile__description');
 const closeButtonProfileInfo = document.querySelector('.popup__button-close_theme_profile-info');
-let cards = document.querySelector('.cards');
+const cards = document.querySelector('.cards');
 const addCardButton = document.querySelector('.profile__add-button');
 const popupAddCard = document.querySelector('.popup_theme_add-card');
 const closeButtonAddCard = document.querySelector('.popup__button-close_theme_add-card');
@@ -27,39 +27,16 @@ function changeInfo(evt) {
     evt.preventDefault();
 }
 
+function openPopup(popup) {
+    popup.classList.add('popup_opened');
+}
+
 function openOrClosePopupProfileInfo() {
-    popupProfileInfo.classList.toggle('popup_opened');
+    openPopup(popupProfileInfo);
 
     profileName.value = profileNameField.textContent;
     profileJob.value = profileJobField.textContent;
 }
-
-const initialCards = [
-    {
-        name: 'Букет цветов',
-        link: 'https://images.unsplash.com/photo-1660873056543-0395ff5b918a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=761&q=80'
-    },
-    {
-        name: 'Ламы',
-        link: 'https://images.unsplash.com/photo-1660878561965-b8ce1342c507?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80'
-    },
-    {
-        name: 'Ретро авто',
-        link: 'https://images.unsplash.com/photo-1660888414951-4639f2641aee?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80'
-    },
-    {
-        name: 'Завтрак',
-        link: 'https://images.unsplash.com/photo-1660744562389-57bf4544afe2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80'
-    },
-    {
-        name: 'Дом на колесах',
-        link: 'https://images.unsplash.com/photo-1660704897097-6b30e802505c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80'
-    },
-    {
-        name: 'Mope',
-        link: 'https://images.unsplash.com/photo-1660864254373-f9e29374f5df?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80'
-    }
-];
 
 initialCards.forEach(cardsOnPage);
 
