@@ -1,7 +1,7 @@
 const initialCards = [
     {
         name: 'Букет цветов',
-        link: 'https//images.unsplash.com/photo-1660873056543-0395ff5b918a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=761&q=80'
+        link: 'https://images.unsplash.com/photo-1523693916903-027d144a2b7d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80'
     },
     {
         name: 'Ламы',
