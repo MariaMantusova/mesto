@@ -48,17 +48,19 @@ function closePopupProfileInfo() {
 
 initialCards.forEach(addCard);
 
-function cardInformation(cardElement, src, title) {
+function createCard(src, title) {
+    const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
     const cardImage = cardElement.querySelector('.card__image');
 
     cardImage.src = src;
     cardImage.alt = title;
     cardElement.querySelector('.card__title').textContent = title;
 
-
     cardElement.querySelector('.card__like').addEventListener('click', likeCard);
     cardElement.querySelector('.card__delete-button').addEventListener('click', deleteCard);
     cardImage.addEventListener('click', openBigImageListener);
+
+    cards.prepend(cardElement);
 }
 
 function openPopupAddCard() {
@@ -66,22 +68,14 @@ function openPopupAddCard() {
 }
 
 function addCard(card) {
-    const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
-
-    cards.append(cardElement);
-
-    cardInformation(cardElement, card.link, card.name)
+    createCard(card.link, card.name);
 }
 
 function submitAddCard(evt) {
     evt.preventDefault();
-    const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
 
-    cards.prepend(cardElement);
-
+    createCard(cardImage.value, cardTitle.value);
     closePopupAddCard();
-
-    cardInformation(cardElement, cardImage.value, cardTitle.value);
 }
 
 function closePopupAddCard() {
