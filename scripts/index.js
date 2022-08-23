@@ -60,7 +60,7 @@ function createCard(src, title) {
     cardElement.querySelector('.card__delete-button').addEventListener('click', deleteCard);
     cardImage.addEventListener('click', openBigImageListener);
 
-    cards.prepend(cardElement);
+    return cardElement;
 }
 
 function openPopupAddCard() {
@@ -68,13 +68,15 @@ function openPopupAddCard() {
 }
 
 function addCard(card) {
-    createCard(card.link, card.name);
+    cards.prepend(createCard(card.link, card.name));
 }
 
 function submitAddCard(evt) {
     evt.preventDefault();
-
-    createCard(cardImage.value, cardTitle.value);
+    addCard({
+        link: cardImage.value,
+        name: cardTitle.value
+    });
     closePopupAddCard();
 }
 
