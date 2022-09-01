@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="./pages/index.css">
+    <script defer src="./scripts/validate.js"></script>
     <script defer src="./scripts/cards.js"></script>
     <script defer src="./scripts/index.js"></script>
     <title>Место</title>
@@ -41,10 +42,10 @@
             <form class="popup__form popup__form_theme_profile-info">
                 <input type="text" id="profile-info-input-name" name="name" class="popup__item popup__item_el_name"
                        placeholder="Имя пользователя" minlength="2" maxlength="40" required>
-                <span class="profile-info-input-name-error popup__item-error"></span>
+                <span class="profile-info-input-name-error popup__item-error">*</span>
                 <input type="text" id="profile-info-input-job" name="job" class="popup__item popup__item_el_job"
                        placeholder="Род деятельности" minlength="2" maxlength="200" required>
-                <span class="profile-info-input-job-error popup__item-error"></span>
+                <span class="profile-info-input-job-error popup__item-error">*</span>
                 <button type="submit" class="popup__button popup__button_theme_profile-info">
                     Сохранить</button>
             </form>
@@ -59,10 +60,10 @@
             <form class="popup__form popup__form_theme_add-card">
                 <input type="text" id="add-card-input-title" name="title" class="popup__item popup__item_el_title"
                        placeholder="Название" minlength="2" maxlength="30" required>
-                <span class="add-card-input-title-error popup__item-error"></span>
+                <span class="add-card-input-title-error popup__item-error">*</span>
                 <input type="url" id="add-card-input-link" name="image" class="popup__item popup__item_el_image"
                        placeholder="Ссылка на картинку" required>
-                <span class="add-card-input-link-error popup__item-error"></span>
+                <span class="add-card-input-link-error popup__item-error">*</span>
                 <button type="submit" class="popup__button popup__button_theme_add-card">
                     Создать
                 </button>
