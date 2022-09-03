@@ -105,12 +105,26 @@ function closePopupImage() {
     closePopup(popupThemeImage);
 }
 
+function initPopupsCloserByBackground() {
+    const popupsList = Array.from(document.querySelectorAll('.popup'));
+
+    popupsList.forEach((popup) => {
+
+        popup.addEventListener('click', (evt) => {
+            if (popup.classList.contains('popup_opened') && evt.target === evt.currentTarget) {
+                closePopup(popup);
+            }
+        })
+    })
+}
+
 function initProfileInfo() {
     profileNameInput.value = profileNameField.textContent;
     profileJobInput.value = profileJobField.textContent;
 }
 
-initProfileInfo()
+initProfileInfo();
+initPopupsCloserByBackground();
 editProfileButton.addEventListener('click', openPopupProfileInfo);
 addCardButton.addEventListener('click', openPopupAddCard);
 closeButtonPopupProfileInfo.addEventListener('click', closePopupProfileInfo);
