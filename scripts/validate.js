@@ -17,7 +17,7 @@ function showInputError(inputElement, errorInputClass, errorSpan, errorSpanClass
 function hideInputError(inputElement, errorInputClass, errorSpan, errorSpanClass) {
     inputElement.classList.remove(errorInputClass);
     errorSpan.classList.remove(errorSpanClass);
-    errorSpan.textContent = '*';
+    errorSpan.textContent = '';
 }
 
 function toggleSubmitButton(inputList, submitButton, inactiveButtonClass) {
