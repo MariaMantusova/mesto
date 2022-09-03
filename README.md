@@ -19,6 +19,7 @@
 * Grid Layout
 * JavaScript
 * БЭМ структура
+* Валидация с помощью JS
 _____
 
 * [Ссылка на gh-pages](https://mariamantusova.github.io/mesto/)

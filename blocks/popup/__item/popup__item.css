@@ -3,7 +3,7 @@
     max-width: 358px;
     width: 100%;
     box-sizing: border-box;
-    margin-top: 11px;
+    margin-top: 0;
     border-bottom: 1px solid rgba(0, 0, 0, .2);
     padding-bottom: 13px;
     font-weight: 400;
@@ -14,7 +14,6 @@
 
 @media screen and (max-width: 650px) {
     .popup__item {
-        margin-top: 28px;
         max-width: 238px;
     }
 }
