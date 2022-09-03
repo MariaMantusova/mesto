@@ -105,16 +105,28 @@ function closePopupImage() {
     closePopup(popupThemeImage);
 }
 
-function initPopupsCloserByBackground() {
+function initPopupsClosers() {
     const popupsList = Array.from(document.querySelectorAll('.popup'));
 
     popupsList.forEach((popup) => {
+        addPopupCloserByBackground(popup);
+        addPopupCloserByEscape(popup);
+    })
+}
 
-        popup.addEventListener('click', (evt) => {
-            if (popup.classList.contains('popup_opened') && evt.target === evt.currentTarget) {
-                closePopup(popup);
-            }
-        })
+function addPopupCloserByBackground(popup) {
+    popup.addEventListener('click', (evt) => {
+        if (popup.classList.contains('popup_opened') && evt.target === evt.currentTarget) {
+            closePopup(popup);
+        }
+    })
+}
+
+function addPopupCloserByEscape(popup) {
+    document.addEventListener('keydown', (evt) => {
+        if (popup.classList.contains('popup_opened') && evt.key === 'Escape') {
+            closePopup(popup);
+        }
     })
 }
 
@@ -124,7 +136,7 @@ function initProfileInfo() {
 }
 
 initProfileInfo();
-initPopupsCloserByBackground();
+initPopupsClosers();
 editProfileButton.addEventListener('click', openPopupProfileInfo);
 addCardButton.addEventListener('click', openPopupAddCard);
 closeButtonPopupProfileInfo.addEventListener('click', closePopupProfileInfo);
