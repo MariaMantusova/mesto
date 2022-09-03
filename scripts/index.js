@@ -29,9 +29,7 @@ function closePopup(popup) {
 
 function openPopupProfileInfo() {
     openPopup(popupProfileInfo);
-
-    profileNameInput.value = profileNameField.textContent;
-    profileJobInput.value = profileJobField.textContent;
+    initProfileInfo();
 }
 
 function changeProfileInfo(evt) {
@@ -94,7 +92,7 @@ function likeCard(evt) {
 }
 
 function openPopupImage(src, figcaption) {
-   openPopup(popupThemeImage);
+    openPopup(popupThemeImage);
     popupImage.setAttribute('src', src);
     popupCaption.textContent = figcaption;
 }
@@ -107,6 +105,12 @@ function closePopupImage() {
     closePopup(popupThemeImage);
 }
 
+function initProfileInfo() {
+    profileNameInput.value = profileNameField.textContent;
+    profileJobInput.value = profileJobField.textContent;
+}
+
+initProfileInfo()
 editProfileButton.addEventListener('click', openPopupProfileInfo);
 addCardButton.addEventListener('click', openPopupAddCard);
 closeButtonPopupProfileInfo.addEventListener('click', closePopupProfileInfo);
