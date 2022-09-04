@@ -18,13 +18,16 @@ const popupThemeImage = document.querySelector('.popup_theme_image');
 const closeButtonPopupImage = document.querySelector('.popup__button-close_theme_image');
 const popupImage = document.querySelector('.popup__image');
 const popupCaption = document.querySelector('.popup__caption');
+const submitButtonAddCard = popupAddCard.querySelector('.popup__button');
 
 function openPopup(popup) {
     popup.classList.add('popup_opened');
+    document.addEventListener('keydown', closeByEscape);
 }
 
 function closePopup(popup) {
     popup.classList.remove('popup_opened');
+    document.removeEventListener('keydown', closeByEscape);
 }
 
 function openPopupProfileInfo() {
@@ -75,7 +78,14 @@ function submitAddCard(evt) {
         link: cardImage.value,
         name: cardTitle.value
     });
+    evt.target.reset();
+    disableButton(submitButtonAddCard);
     closePopupAddCard();
+}
+
+function disableButton(submitButton) {
+    submitButton.classList.add('popup__button_disabled');
+    submitButton.setAttribute('disabled', 'disabled');
 }
 
 function closePopupAddCard() {
@@ -94,6 +104,7 @@ function likeCard(evt) {
 function openPopupImage(src, figcaption) {
     openPopup(popupThemeImage);
     popupImage.setAttribute('src', src);
+    popupImage.setAttribute('alt', figcaption)
     popupCaption.textContent = figcaption;
 }
 
@@ -110,7 +121,6 @@ function initPopupsClosers() {
 
     popupsList.forEach((popup) => {
         addPopupCloserByBackground(popup);
-        addPopupCloserByEscape(popup);
     })
 }
 
@@ -122,12 +132,11 @@ function addPopupCloserByBackground(popup) {
     })
 }
 
-function addPopupCloserByEscape(popup) {
-    document.addEventListener('keydown', (evt) => {
-        if (popup.classList.contains('popup_opened') && evt.key === 'Escape') {
-            closePopup(popup);
-        }
-    })
+function closeByEscape(evt) {
+    const openedPopup = document.querySelector('.popup_opened');
+    if (evt.key === 'Escape') {
+        closePopup(openedPopup);
+    }
 }
 
 function initProfileInfo() {
