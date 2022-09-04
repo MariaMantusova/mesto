@@ -59,7 +59,7 @@ function createCard(src, title) {
 
     cardElement.querySelector('.card__like').addEventListener('click', likeCard);
     cardElement.querySelector('.card__delete-button').addEventListener('click', deleteCard);
-    cardImage.addEventListener('click', handleBigImageListener);
+    cardImage.addEventListener('click', handleImageClick);
 
     return cardElement;
 }
@@ -108,7 +108,7 @@ function openPopupImage(src, figcaption) {
     popupCaption.textContent = figcaption;
 }
 
-function handleBigImageListener(evt) {
+function handleImageClick(evt) {
     openPopupImage(evt.target.getAttribute('src'), evt.target.getAttribute('alt'));
 }
 
@@ -119,9 +119,7 @@ function closePopupImage() {
 function initPopupsClosers() {
     const popupsList = Array.from(document.querySelectorAll('.popup'));
 
-    popupsList.forEach((popup) => {
-        addPopupCloserByBackground(popup);
-    })
+    popupsList.forEach(addPopupCloserByBackground);
 }
 
 function addPopupCloserByBackground(popup) {
@@ -133,8 +131,8 @@ function addPopupCloserByBackground(popup) {
 }
 
 function closeByEscape(evt) {
-    const openedPopup = document.querySelector('.popup_opened');
     if (evt.key === 'Escape') {
+        const openedPopup = document.querySelector('.popup_opened');
         closePopup(openedPopup);
     }
 }
