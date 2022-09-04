@@ -59,7 +59,7 @@ function createCard(src, title) {
 
     cardElement.querySelector('.card__like').addEventListener('click', likeCard);
     cardElement.querySelector('.card__delete-button').addEventListener('click', deleteCard);
-    cardImage.addEventListener('click', openBigImageListener);
+    cardImage.addEventListener('click', handleBigImageListener);
 
     return cardElement;
 }
@@ -108,7 +108,7 @@ function openPopupImage(src, figcaption) {
     popupCaption.textContent = figcaption;
 }
 
-function openBigImageListener(evt) {
+function handleBigImageListener(evt) {
     openPopupImage(evt.target.getAttribute('src'), evt.target.getAttribute('alt'));
 }
 
