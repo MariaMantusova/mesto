@@ -1,5 +1,6 @@
-import { Card } from './Card.js'
-import { initialCards } from './cards.js'
+import {Card} from './Card.js'
+import {initialCards} from './cards.js'
+import {FormValidator} from './FormValidator.js'
 
 const editProfileButton = document.querySelector('.profile__edit-button');
 const popupProfileInfo = document.querySelector('.popup_theme_profile-info');
@@ -18,9 +19,18 @@ const cardTitle = document.querySelector('.popup__item_el_title');
 const cardImage = document.querySelector('.popup__item_el_image');
 const popupThemeImage = document.querySelector('.popup_theme_image');
 const closeButtonPopupImage = document.querySelector('.popup__button-close_theme_image');
-const popupImage = document.querySelector('.popup__image');
-const popupCaption = document.querySelector('.popup__caption');
 const submitButtonAddCard = popupAddCard.querySelector('.popup__button');
+const formList = Array.from(document.querySelectorAll('.popup__form'))
+
+formList.forEach(() => {
+    new FormValidator({
+        inputSelector: '.popup__item',
+        submitButtonSelector: '.popup__button',
+        inactiveButtonClass: 'popup__button_disabled',
+        inputErrorClass: 'popup__item_type_error',
+        errorClass: 'popup__item-error_active'
+    }, '.popup__form').enableValidation()
+})
 
 function openPopup(popup) {
     popup.classList.add('popup_opened');
