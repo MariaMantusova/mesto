@@ -49,8 +49,21 @@ export class Card {
 
     _handleImageClick() {
         document.querySelector('.popup_theme_image').classList.add('popup_opened');
+        this._handleEscapeClick()
         document.querySelector('.popup__image').setAttribute('src', this._image);
         document.querySelector('.popup__image').setAttribute('alt', this._name)
         document.querySelector('.popup__caption').textContent = this._name;
+    }
+
+    _handleEscapeClick() {
+        document.querySelector('.popup_theme_image').classList.contains('popup_opened')
+        ? document.addEventListener('keydown', this._closingByEscape)
+            : document.removeEventListener('keydown', this._closingByEscape);
+    }
+
+    _closingByEscape(evt) {
+        if (evt.key === 'Escape') {
+            document.querySelector('.popup_theme_image').classList.remove('popup_opened')
+        }
     }
 }
