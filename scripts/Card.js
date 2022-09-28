@@ -45,6 +45,7 @@ export class Card {
     _handleDeleteButtonClick() {
         const itemElement = this._element
         itemElement.remove();
+        this._element = null;
     }
 
     _handleImageClick() {
