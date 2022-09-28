@@ -1,6 +1,7 @@
 import {Card} from './Card.js'
 import {initialCards} from './cards.js'
 import {FormValidator} from './FormValidator.js'
+import {openPopup, closePopup} from './cardHelp.js'
 
 const buttonOpenPopupProfile = document.querySelector('.profile__edit-button');
 const popupProfileInfo = document.querySelector('.popup_theme_profile-info');
@@ -31,16 +32,6 @@ formList.forEach(() => {
         errorClass: 'popup__item-error_active'
     }, '.popup__form').enableValidation()
 })
-
-function openPopup(popup) {
-    popup.classList.add('popup_opened');
-    document.addEventListener('keydown', closeByEscape);
-}
-
-function closePopup(popup) {
-    popup.classList.remove('popup_opened');
-    document.removeEventListener('keydown', closeByEscape);
-}
 
 function openPopupProfileInfo() {
     openPopup(popupProfileInfo);
@@ -110,13 +101,6 @@ function addPopupCloserByBackground(popup) {
             closePopup(popup);
         }
     })
-}
-
-function closeByEscape(evt) {
-    if (evt.key === 'Escape') {
-        const openedPopup = document.querySelector('.popup_opened');
-        closePopup(openedPopup);
-    }
 }
 
 function initProfileInfo() {
