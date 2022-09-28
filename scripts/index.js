@@ -2,24 +2,24 @@ import {Card} from './Card.js'
 import {initialCards} from './cards.js'
 import {FormValidator} from './FormValidator.js'
 
-const editProfileButton = document.querySelector('.profile__edit-button');
+const buttonOpenPopupProfile = document.querySelector('.profile__edit-button');
 const popupProfileInfo = document.querySelector('.popup_theme_profile-info');
 const formProfileInfo = document.querySelector('.popup__form_theme_profile-info');
 const profileNameInput = document.querySelector('.popup__item_el_name');
 const profileJobInput = document.querySelector('.popup__item_el_job');
 const profileNameField = document.querySelector('.profile__name');
 const profileJobField = document.querySelector('.profile__description');
-const closeButtonPopupProfileInfo = document.querySelector('.popup__button-close_theme_profile-info');
+const buttonClosePopupProfileInfo = document.querySelector('.popup__button-close_theme_profile-info');
 const cards = document.querySelector('.cards');
-const addCardButton = document.querySelector('.profile__add-button');
+const buttonAddCard = document.querySelector('.profile__add-button');
 const popupAddCard = document.querySelector('.popup_theme_add-card');
-const closeButtonPopupAddCard = document.querySelector('.popup__button-close_theme_add-card');
+const buttonClosePopupAddCard = document.querySelector('.popup__button-close_theme_add-card');
 const formAddCard = document.querySelector('.popup_theme_add-card');
 const cardTitle = document.querySelector('.popup__item_el_title');
 const cardImage = document.querySelector('.popup__item_el_image');
 const popupThemeImage = document.querySelector('.popup_theme_image');
-const closeButtonPopupImage = document.querySelector('.popup__button-close_theme_image');
-const submitButtonAddCard = popupAddCard.querySelector('.popup__button');
+const buttonClosePopupImage = document.querySelector('.popup__button-close_theme_image');
+const buttonSubmitAddCard = popupAddCard.querySelector('.popup__button');
 const formList = Array.from(document.querySelectorAll('.popup__form'))
 
 formList.forEach(() => {
@@ -81,7 +81,7 @@ function submitAddCard(evt) {
         name: cardTitle.value
     });
     evt.target.reset();
-    disableButton(submitButtonAddCard);
+    disableButton(buttonSubmitAddCard);
     closePopupAddCard();
 }
 
@@ -126,10 +126,10 @@ function initProfileInfo() {
 
 initProfileInfo();
 initPopupsClosers();
-editProfileButton.addEventListener('click', openPopupProfileInfo);
-addCardButton.addEventListener('click', openPopupAddCard);
-closeButtonPopupProfileInfo.addEventListener('click', closePopupProfileInfo);
-closeButtonPopupAddCard.addEventListener('click', closePopupAddCard);
-closeButtonPopupImage.addEventListener('click', closePopupImage);
+buttonOpenPopupProfile.addEventListener('click', openPopupProfileInfo);
+buttonAddCard.addEventListener('click', openPopupAddCard);
+buttonClosePopupProfileInfo.addEventListener('click', closePopupProfileInfo);
+buttonClosePopupAddCard.addEventListener('click', closePopupAddCard);
+buttonClosePopupImage.addEventListener('click', closePopupImage);
 formProfileInfo.addEventListener('submit', changeProfileInfo);
 formAddCard.addEventListener('submit', submitAddCard);
