@@ -54,8 +54,12 @@ function openPopupAddCard() {
     openPopup(popupAddCard);
 }
 
+function createCard(name, link, templateSelector) {
+    return new Card(name, link, templateSelector).generateCard()
+}
+
 function addCard(card) {
-    cards.prepend(new Card(card.name, card.link, '#card').generateCard());
+    cards.prepend(createCard(card.name, card.link, '#card'));
 }
 
 initialCards.forEach((card) => {
