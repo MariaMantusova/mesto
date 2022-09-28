@@ -44,14 +44,14 @@ export class FormValidator {
         }
     }
 
-    _setEventListeners(formItem) {
-        const inputList = Array.from(formItem.querySelectorAll(this._inputSelector));
-        const submitButton = formItem.querySelector(this._submitButtonSelector);
+    _setEventListeners() {
+        const inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
+        const submitButton = this._formElement.querySelector(this._submitButtonSelector);
 
         this._toggleSubmitButton(inputList, submitButton, this._inactiveButtonClass);
 
         inputList.forEach((inputItem) => {
-            const errorElement = formItem.querySelector(`.${inputItem.id}-error`);
+            const errorElement = this._formElement.querySelector(`.${inputItem.id}-error`);
             inputItem.addEventListener('input', () => {
                 this._setInputItemVisibility(inputItem, errorElement);
                 this._toggleSubmitButton(inputList, submitButton, this._inactiveButtonClass);
@@ -60,12 +60,9 @@ export class FormValidator {
     }
 
     enableValidation() {
-        const formList = Array.from(document.querySelectorAll(this._formElement));
-        formList.forEach((formItem) => {
-            formItem.addEventListener('submit', (evt) => {
-                evt.preventDefault();
-            })
-            this._setEventListeners(formItem);
+        this._formElement.addEventListener('submit', (evt) => {
+            evt.preventDefault();
         })
+        this._setEventListeners();
     }
 }

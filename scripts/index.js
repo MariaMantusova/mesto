@@ -23,16 +23,6 @@ const buttonClosePopupImage = document.querySelector('.popup__button-close_theme
 const buttonSubmitAddCard = popupAddCard.querySelector('.popup__button');
 const formList = Array.from(document.querySelectorAll('.popup__form'))
 
-formList.forEach(() => {
-    new FormValidator({
-        inputSelector: '.popup__item',
-        submitButtonSelector: '.popup__button',
-        inactiveButtonClass: 'popup__button_disabled',
-        inputErrorClass: 'popup__item_type_error',
-        errorClass: 'popup__item-error_active'
-    }, '.popup__form').enableValidation()
-})
-
 function openPopupProfileInfo() {
     openPopup(popupProfileInfo);
     initProfileInfo();
@@ -112,7 +102,20 @@ function initProfileInfo() {
     profileJobInput.value = profileJobField.textContent;
 }
 
+function initValidation() {
+    formList.forEach((form) => {
+        new FormValidator({
+            inputSelector: '.popup__item',
+            submitButtonSelector: '.popup__button',
+            inactiveButtonClass: 'popup__button_disabled',
+            inputErrorClass: 'popup__item_type_error',
+            errorClass: 'popup__item-error_active'
+        }, form).enableValidation()
+    })
+}
+
 initProfileInfo();
+initValidation();
 initPopupsClosers();
 buttonOpenPopupProfile.addEventListener('click', openPopupProfileInfo);
 buttonAddCard.addEventListener('click', openPopupAddCard);
