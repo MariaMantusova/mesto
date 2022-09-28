@@ -43,7 +43,7 @@ export class Card {
     }
 
     _handleDeleteButtonClick() {
-        const itemElement = this._element.closest('.card');
+        const itemElement = this._element
         itemElement.remove();
     }
 
