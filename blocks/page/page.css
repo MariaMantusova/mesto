@@ -12,4 +12,5 @@
     background-color: #000000;
     font-family: Inter, Arial, sans-serif;
     color: #FFFFFF;
+    min-height: 100vh;
 }
