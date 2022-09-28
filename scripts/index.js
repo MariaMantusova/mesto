@@ -66,13 +66,9 @@ function submitAddCard(evt) {
         name: cardTitle.value
     });
     evt.target.reset();
-    disableButton(buttonSubmitAddCard);
+    buttonSubmitAddCard.classList.add('popup__button_disabled');
+    buttonSubmitAddCard.setAttribute('disabled', 'disabled');
     closePopupAddCard();
-}
-
-function disableButton(submitButton) {
-    submitButton.classList.add('popup__button_disabled');
-    submitButton.setAttribute('disabled', 'disabled');
 }
 
 function closePopupAddCard() {
