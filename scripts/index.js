@@ -66,8 +66,13 @@ function submitAddCard(evt) {
         name: cardTitle.value
     });
     evt.target.reset();
-    buttonSubmitAddCard.classList.add('popup__button_disabled');
-    buttonSubmitAddCard.setAttribute('disabled', 'disabled');
+    new FormValidator({
+        inputSelector: '.popup__item',
+        submitButtonSelector: '.popup__button',
+        inactiveButtonClass: 'popup__button_disabled',
+        inputErrorClass: 'popup__item_type_error',
+        errorClass: 'popup__item-error_active'
+    }, null).disableButton(buttonSubmitAddCard);
     closePopupAddCard();
 }
 

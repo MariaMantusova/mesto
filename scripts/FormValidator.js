@@ -20,10 +20,14 @@ export class FormValidator {
         errorSpan.textContent = '';
     }
 
+    disableButton(submitButton) {
+        submitButton.setAttribute('disabled', 'disabled');
+        submitButton.classList.add(this._inactiveButtonClass);
+    }
+
     _toggleSubmitButton(inputList, submitButton, inactiveButtonClass) {
         if (this._isInputListInvalid(inputList)) {
-            submitButton.setAttribute('disabled', 'disabled');
-            submitButton.classList.add(inactiveButtonClass);
+            this.disableButton(submitButton);
         } else {
             submitButton.classList.remove(inactiveButtonClass);
             submitButton.removeAttribute('disabled', 'disabled');
