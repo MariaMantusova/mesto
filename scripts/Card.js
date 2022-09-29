@@ -1,4 +1,4 @@
-import {openPopup, popupImage, popupCaption} from './cardHelp.js'
+import {openPopup, popupImage, popupCaption, popupThemeImage} from './cardHelp.js'
 
 export class Card {
     constructor(name, link, templateSelector) {
@@ -51,9 +51,9 @@ export class Card {
     }
 
     _handleImageClick() {
-        openPopup(document.querySelector('.popup_theme_image'))
         popupImage.setAttribute('src', this._image);
         popupImage.setAttribute('alt', this._name)
         popupCaption.textContent = this._name;
+        openPopup(popupThemeImage);
     }
 }
