@@ -21,7 +21,20 @@ const cardImage = document.querySelector('.popup__item_el_image');
 const popupThemeImage = document.querySelector('.popup_theme_image');
 const buttonClosePopupImage = document.querySelector('.popup__button-close_theme_image');
 const buttonSubmitAddCard = popupAddCard.querySelector('.popup__button');
-const formList = Array.from(document.querySelectorAll('.popup__form'))
+const profileInfoValidator = new FormValidator({
+    inputSelector: '.popup__item',
+    submitButtonSelector: '.popup__button',
+    inactiveButtonClass: 'popup__button_disabled',
+    inputErrorClass: 'popup__item_type_error',
+    errorClass: 'popup__item-error_active'
+}, formProfileInfo);
+const addCardValidator = new FormValidator({
+    inputSelector: '.popup__item',
+    submitButtonSelector: '.popup__button',
+    inactiveButtonClass: 'popup__button_disabled',
+    inputErrorClass: 'popup__item_type_error',
+    errorClass: 'popup__item-error_active'
+}, formAddCard);
 
 function openPopupProfileInfo() {
     openPopup(popupProfileInfo);
@@ -66,13 +79,7 @@ function submitAddCard(evt) {
         name: cardTitle.value
     });
     evt.target.reset();
-    new FormValidator({
-        inputSelector: '.popup__item',
-        submitButtonSelector: '.popup__button',
-        inactiveButtonClass: 'popup__button_disabled',
-        inputErrorClass: 'popup__item_type_error',
-        errorClass: 'popup__item-error_active'
-    }, null).disableButton(buttonSubmitAddCard);
+    addCardValidator.disableButton(buttonSubmitAddCard);
     closePopupAddCard();
 }
 
@@ -104,15 +111,8 @@ function initProfileInfo() {
 }
 
 function initValidation() {
-    formList.forEach((form) => {
-        new FormValidator({
-            inputSelector: '.popup__item',
-            submitButtonSelector: '.popup__button',
-            inactiveButtonClass: 'popup__button_disabled',
-            inputErrorClass: 'popup__item_type_error',
-            errorClass: 'popup__item-error_active'
-        }, form).enableValidation()
-    })
+    addCardValidator.enableValidation();
+    profileInfoValidator.enableValidation();
 }
 
 initProfileInfo();
