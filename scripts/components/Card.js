@@ -1,4 +1,4 @@
-import {openPopup, popupImage, popupCaption, popupThemeImage} from './cardHelp.js'
+import {openPopup, popupImage, popupCaption, popupThemeImage} from '../cardHelp.js'
 
 export class Card {
     constructor(name, link, templateSelector) {

@@ -1,7 +1,7 @@
-import {Card} from './Card.js'
-import {initialCards} from './cards.js'
-import {FormValidator} from './FormValidator.js'
-import {openPopup, closePopup} from './cardHelp.js'
+import {Card} from '../components/Card.js'
+import {initialCards} from '../utils/cards.js'
+import {FormValidator} from '../components/FormValidator.js'
+import {openPopup, closePopup} from '../cardHelp.js'
 
 const buttonOpenPopupProfile = document.querySelector('.profile__edit-button');
 const popupProfileInfo = document.querySelector('.popup_theme_profile-info');
