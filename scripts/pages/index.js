@@ -2,7 +2,8 @@ import {Card} from '../components/Card.js'
 import {initialCards} from '../utils/cards.js'
 import {FormValidator} from '../components/FormValidator.js'
 import Section from '../components/Section.js'
-import Popup from "../components/Popup.js";
+import Popup from '../components/Popup.js';
+import PopupWithImage from '../components/PopupWithImage.js';
 
 const buttonOpenPopupProfile = document.querySelector('.profile__edit-button');
 const popupProfileInfo = document.querySelector('.popup_theme_profile-info');
@@ -38,7 +39,7 @@ const addCardValidator = new FormValidator({
 }, formAddCard);
 const PopupAddCard = new Popup(popupAddCard);
 const PopupProfileInfo = new Popup(popupProfileInfo);
-export const PopupThemeImage = new Popup(popupThemeImage)
+export const PopupThemeImage = new PopupWithImage(popupThemeImage)
 
 function openPopupProfileInfo() {
     PopupProfileInfo.open();
