@@ -2,6 +2,7 @@ import {Card} from '../components/Card.js'
 import {initialCards} from '../utils/cards.js'
 import {FormValidator} from '../components/FormValidator.js'
 import {openPopup, closePopup} from '../cardHelp.js'
+import Section from '../components/Section.js'
 
 const buttonOpenPopupProfile = document.querySelector('.profile__edit-button');
 const popupProfileInfo = document.querySelector('.popup_theme_profile-info');
@@ -57,27 +58,28 @@ function openPopupAddCard() {
     openPopup(popupAddCard);
 }
 
-function createCard(name, link, templateSelector) {
-    return new Card(name, link, templateSelector).generateCard()
-}
+const addCardList = new Section({data: initialCards, renderer: ((item) => {
+    const card = new Card(item.name, item.link, '#card');
+        const cardElement = card.generateCard();
 
-function addCard(card) {
-    cards.prepend(createCard(card.name, card.link, '#card'));
-}
-
-initialCards.forEach((card) => {
-    addCard({
-        name: card.name,
-        link: card.link
+        addCardList.addItem(cardElement);
     })
-})
+}, cards);
+
+addCardList.renderItems();
+
+const addCard = new Section({
+    data: [{}], renderer: (() => {
+        const card = new Card(cardTitle.value, cardImage.value, '#card');
+        const cardElement = card.generateCard();
+
+        addCardList.addItem(cardElement);
+    })
+}, cards);
 
 function submitAddCard(evt) {
     evt.preventDefault();
-    addCard({
-        link: cardImage.value,
-        name: cardTitle.value
-    });
+    addCard.renderItems();
     evt.target.reset();
     addCardValidator.disableButton(buttonSubmitAddCard);
     closePopupAddCard();
