@@ -1,8 +1,8 @@
 import {Card} from '../components/Card.js'
 import {initialCards} from '../utils/cards.js'
 import {FormValidator} from '../components/FormValidator.js'
-import {openPopup, closePopup} from '../cardHelp.js'
 import Section from '../components/Section.js'
+import Popup from "../components/Popup.js";
 
 const buttonOpenPopupProfile = document.querySelector('.profile__edit-button');
 const popupProfileInfo = document.querySelector('.popup_theme_profile-info');
@@ -36,9 +36,12 @@ const addCardValidator = new FormValidator({
     inputErrorClass: 'popup__item_type_error',
     errorClass: 'popup__item-error_active'
 }, formAddCard);
+const PopupAddCard = new Popup(popupAddCard);
+const PopupProfileInfo = new Popup(popupProfileInfo);
+export const PopupThemeImage = new Popup(popupThemeImage)
 
 function openPopupProfileInfo() {
-    openPopup(popupProfileInfo);
+    PopupProfileInfo.open();
     initProfileInfo();
 }
 
@@ -47,15 +50,15 @@ function changeProfileInfo(evt) {
     profileNameField.textContent = profileNameInput.value;
     profileJobField.textContent = profileJobInput.value;
 
-    closePopup(popupProfileInfo);
+    PopupProfileInfo.close();
 }
 
 function closePopupProfileInfo() {
-    closePopup(popupProfileInfo);
+    PopupProfileInfo.close()
 }
 
 function openPopupAddCard() {
-    openPopup(popupAddCard);
+    PopupAddCard.open();
 }
 
 const addCardList = new Section({data: initialCards, renderer: ((item) => {
@@ -86,25 +89,19 @@ function submitAddCard(evt) {
 }
 
 function closePopupAddCard() {
-    closePopup(popupAddCard);
+    PopupAddCard.close();
 }
 
 function closePopupImage() {
-    closePopup(popupThemeImage);
+    PopupThemeImage.close();
 }
 
 function initPopupsClosers() {
     const popupsList = Array.from(document.querySelectorAll('.popup'));
 
-    popupsList.forEach(addPopupCloserByBackground);
-}
-
-function addPopupCloserByBackground(popup) {
-    popup.addEventListener('click', (evt) => {
-        if (popup.classList.contains('popup_opened') && evt.target === evt.currentTarget) {
-            closePopup(popup);
-        }
-    })
+    popupsList.forEach((popup) => {
+        new Popup(popup).setEventListeners();
+    });
 }
 
 function initProfileInfo() {

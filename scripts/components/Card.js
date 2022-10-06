@@ -1,4 +1,5 @@
-import {openPopup, popupImage, popupCaption, popupThemeImage} from '../cardHelp.js'
+import {popupImage, popupCaption} from '../utils/constants.js'
+import {PopupThemeImage} from "../pages/index.js";
 
 export class Card {
     constructor(name, link, templateSelector) {
@@ -54,6 +55,6 @@ export class Card {
         popupImage.setAttribute('src', this._image);
         popupImage.setAttribute('alt', this._name)
         popupCaption.textContent = this._name;
-        openPopup(popupThemeImage);
+        PopupThemeImage.open();
     }
 }
