@@ -2,7 +2,6 @@ import {Card} from '../components/Card.js'
 import {initialCards} from '../utils/cards.js'
 import {FormValidator} from '../components/FormValidator.js'
 import Section from '../components/Section.js'
-import Popup from '../components/Popup.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from "../components/PopupWithForm.js";
 
@@ -54,6 +53,7 @@ export const PopupThemeImage = new PopupWithImage(popupThemeImage)
 
 PopupAddCard.setEventListeners();
 PopupProfileInfo.setEventListeners();
+PopupThemeImage.setEventListeners();
 
 function openPopupProfileInfo() {
     PopupProfileInfo.open();
@@ -95,14 +95,6 @@ function closePopupImage() {
     PopupThemeImage.close();
 }
 
-function initPopupsClosers() {
-    const popupsList = Array.from(document.querySelectorAll('.popup'));
-
-    popupsList.forEach((popup) => {
-        new Popup(popup).setEventListeners();
-    });
-}
-
 function initProfileInfo() {
     profileNameInput.value = profileNameField.textContent;
     profileJobInput.value = profileJobField.textContent;
@@ -115,7 +107,6 @@ function initValidation() {
 
 initProfileInfo();
 initValidation();
-initPopupsClosers();
 buttonOpenPopupProfile.addEventListener('click', openPopupProfileInfo);
 buttonAddCard.addEventListener('click', openPopupAddCard);
 buttonClosePopupProfileInfo.addEventListener('click', closePopupProfileInfo);
