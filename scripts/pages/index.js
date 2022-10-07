@@ -44,22 +44,20 @@ const PopupAddCard = new PopupWithForm(popupAddCard, (evt) => {
     addCardValidator.disableButton(buttonSubmitAddCard);
     PopupAddCard.close();
 });
-const PopupProfileInfo = new Popup(popupProfileInfo);
+const PopupProfileInfo = new PopupWithForm(popupProfileInfo, (evt) => {
+    evt.preventDefault();
+    profileNameField.textContent = profileNameInput.value;
+    profileJobField.textContent = profileJobInput.value;
+    PopupProfileInfo.close();
+});
 export const PopupThemeImage = new PopupWithImage(popupThemeImage)
 
 PopupAddCard.setEventListeners();
+PopupProfileInfo.setEventListeners();
 
 function openPopupProfileInfo() {
     PopupProfileInfo.open();
     initProfileInfo();
-}
-
-function changeProfileInfo(evt) {
-    evt.preventDefault();
-    profileNameField.textContent = profileNameInput.value;
-    profileJobField.textContent = profileJobInput.value;
-
-    PopupProfileInfo.close();
 }
 
 function closePopupProfileInfo() {
@@ -123,5 +121,3 @@ buttonAddCard.addEventListener('click', openPopupAddCard);
 buttonClosePopupProfileInfo.addEventListener('click', closePopupProfileInfo);
 buttonClosePopupAddCard.addEventListener('click', closePopupAddCard);
 buttonClosePopupImage.addEventListener('click', closePopupImage);
-formProfileInfo.addEventListener('submit', changeProfileInfo);
-// formAddCard.addEventListener('submit', submitAddCard);
