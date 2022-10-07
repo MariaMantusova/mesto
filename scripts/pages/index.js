@@ -4,6 +4,7 @@ import {FormValidator} from '../components/FormValidator.js'
 import Section from '../components/Section.js'
 import Popup from '../components/Popup.js';
 import PopupWithImage from '../components/PopupWithImage.js';
+import PopupWithForm from "../components/PopupWithForm.js";
 
 const buttonOpenPopupProfile = document.querySelector('.profile__edit-button');
 const popupProfileInfo = document.querySelector('.popup_theme_profile-info');
@@ -37,9 +38,16 @@ const addCardValidator = new FormValidator({
     inputErrorClass: 'popup__item_type_error',
     errorClass: 'popup__item-error_active'
 }, formAddCard);
-const PopupAddCard = new Popup(popupAddCard);
+const PopupAddCard = new PopupWithForm(popupAddCard, (evt) => {
+    evt.preventDefault();
+    addCard.renderItems();
+    addCardValidator.disableButton(buttonSubmitAddCard);
+    PopupAddCard.close();
+});
 const PopupProfileInfo = new Popup(popupProfileInfo);
 export const PopupThemeImage = new PopupWithImage(popupThemeImage)
+
+PopupAddCard.setEventListeners();
 
 function openPopupProfileInfo() {
     PopupProfileInfo.open();
@@ -81,14 +89,6 @@ const addCard = new Section({
     })
 }, cards);
 
-function submitAddCard(evt) {
-    evt.preventDefault();
-    addCard.renderItems();
-    evt.target.reset();
-    addCardValidator.disableButton(buttonSubmitAddCard);
-    closePopupAddCard();
-}
-
 function closePopupAddCard() {
     PopupAddCard.close();
 }
@@ -124,4 +124,4 @@ buttonClosePopupProfileInfo.addEventListener('click', closePopupProfileInfo);
 buttonClosePopupAddCard.addEventListener('click', closePopupAddCard);
 buttonClosePopupImage.addEventListener('click', closePopupImage);
 formProfileInfo.addEventListener('submit', changeProfileInfo);
-formAddCard.addEventListener('submit', submitAddCard);
+// formAddCard.addEventListener('submit', submitAddCard);
