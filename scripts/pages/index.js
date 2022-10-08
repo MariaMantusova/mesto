@@ -44,7 +44,7 @@ const userInfo = new UserInfo({
 });
 const PopupAddCard = new PopupWithForm(popupAddCard, (evt) => {
     evt.preventDefault();
-    addCard.renderItems();
+    addCard().renderItems();
     addCardValidator.disableButton(buttonSubmitAddCard);
     PopupAddCard.close();
 });
@@ -84,16 +84,19 @@ const addCardList = new Section({data: initialCards, renderer: ((item) => {
 
 addCardList.renderItems();
 
-const addCard = new Section({
-    data: [{}], renderer: (() => {
-        const card = new Card(cardTitle.value, cardImage.value, '#card', (item) => {
-            PopupThemeImage.open(item[0], item[1])
-        });
-        const cardElement = card.generateCard();
+function addCard() {
+    return new Section({
+        data: [{name: cardTitle.value,
+            link: cardImage.value}], renderer: ((item) => {
+            const card = new Card(item.name, item.link, '#card', () => {
+                PopupThemeImage.open(item.link, item.name);
+            });
+            const cardElement = card.generateCard();
 
-        addCardList.addItem(cardElement);
-    })
-}, cards);
+            addCardList.addItem(cardElement);
+        })
+    }, cards);
+}
 
 function closePopupAddCard() {
     PopupAddCard.close();
