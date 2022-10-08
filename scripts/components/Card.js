@@ -1,10 +1,9 @@
-import {PopupThemeImage} from '../pages/index.js';
-
 export class Card {
-    constructor(name, link, templateSelector) {
+    constructor(name, link, templateSelector, handleCardClick) {
         this._name = name;
         this._image = link;
         this._templateSelector = templateSelector;
+        this._handleCardClick = handleCardClick;
     }
 
     _getTemplate() {
@@ -51,6 +50,6 @@ export class Card {
     }
 
     _handleImageClick() {
-        PopupThemeImage.open(this._image, this._name);
+        this._handleCardClick();
     }
 }

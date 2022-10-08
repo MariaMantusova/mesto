@@ -69,7 +69,9 @@ function openPopupAddCard() {
 }
 
 const addCardList = new Section({data: initialCards, renderer: ((item) => {
-    const card = new Card(item.name, item.link, '#card');
+    const card = new Card(item.name, item.link, '#card', () => {
+        PopupThemeImage.open(item.link, item.name);
+    });
         const cardElement = card.generateCard();
 
         addCardList.addItem(cardElement);
@@ -80,7 +82,9 @@ addCardList.renderItems();
 
 const addCard = new Section({
     data: [{}], renderer: (() => {
-        const card = new Card(cardTitle.value, cardImage.value, '#card');
+        const card = new Card(cardTitle.value, cardImage.value, '#card', (item) => {
+            PopupThemeImage.open(item[0], item[1])
+        });
         const cardElement = card.generateCard();
 
         addCardList.addItem(cardElement);

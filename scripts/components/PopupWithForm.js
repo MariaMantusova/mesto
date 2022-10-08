@@ -12,6 +12,8 @@ export default class PopupWithForm extends Popup {
         const inputsValues = inputsList.map((item) => {
             return item.value
         })
+
+        return inputsValues
     }
 
     setEventListeners() {
