@@ -4,6 +4,7 @@ import {FormValidator} from '../components/FormValidator.js'
 import Section from '../components/Section.js'
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from "../components/PopupWithForm.js";
+import UserInfo from "../components/UserInfo.js";
 
 const buttonOpenPopupProfile = document.querySelector('.profile__edit-button');
 const popupProfileInfo = document.querySelector('.popup_theme_profile-info');
@@ -37,6 +38,10 @@ const addCardValidator = new FormValidator({
     inputErrorClass: 'popup__item_type_error',
     errorClass: 'popup__item-error_active'
 }, formAddCard);
+const userInfo = new UserInfo({
+    userName: profileNameField,
+    userJob: profileJobField
+});
 const PopupAddCard = new PopupWithForm(popupAddCard, (evt) => {
     evt.preventDefault();
     addCard.renderItems();
@@ -45,8 +50,7 @@ const PopupAddCard = new PopupWithForm(popupAddCard, (evt) => {
 });
 const PopupProfileInfo = new PopupWithForm(popupProfileInfo, (evt) => {
     evt.preventDefault();
-    profileNameField.textContent = profileNameInput.value;
-    profileJobField.textContent = profileJobInput.value;
+    userInfo.setUserInfo(profileNameInput.value, profileJobInput.value);
     PopupProfileInfo.close();
 });
 export const PopupThemeImage = new PopupWithImage(popupThemeImage)
@@ -100,8 +104,9 @@ function closePopupImage() {
 }
 
 function initProfileInfo() {
-    profileNameInput.value = profileNameField.textContent;
-    profileJobInput.value = profileJobField.textContent;
+    const info = userInfo.getUserInfo();
+    profileNameInput.value = info.name.textContent;
+    profileJobInput.value = info.job.textContent;
 }
 
 function initValidation() {
