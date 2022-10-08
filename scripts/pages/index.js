@@ -1,29 +1,32 @@
-import {Card} from '../components/Card.js'
+import Card from '../components/Card.js'
 import {initialCards} from '../utils/cards.js'
 import {FormValidator} from '../components/FormValidator.js'
 import Section from '../components/Section.js'
 import PopupWithImage from '../components/PopupWithImage.js';
-import PopupWithForm from "../components/PopupWithForm.js";
-import UserInfo from "../components/UserInfo.js";
+import PopupWithForm from '../components/PopupWithForm.js';
+import UserInfo from '../components/UserInfo.js';
+import {
+    buttonOpenPopupProfile,
+    cardImage,
+    cardTitle,
+    cards,
+    popupAddCard,
+    profileJobField,
+    profileNameField,
+    popupThemeImage,
+    popupProfileInfo,
+    buttonSubmitAddCard,
+    formProfileInfo,
+    formAddCard,
+    profileJobInput,
+    profileNameInput,
+    buttonAddCard,
+    buttonClosePopupAddCard,
+    buttonClosePopupImage,
+    buttonClosePopupProfileInfo
+} from '../utils/constants.js'
 
-const buttonOpenPopupProfile = document.querySelector('.profile__edit-button');
-const popupProfileInfo = document.querySelector('.popup_theme_profile-info');
-const formProfileInfo = document.querySelector('.popup__form_theme_profile-info');
-const profileNameInput = document.querySelector('.popup__item_el_name');
-const profileJobInput = document.querySelector('.popup__item_el_job');
-const profileNameField = document.querySelector('.profile__name');
-const profileJobField = document.querySelector('.profile__description');
-const buttonClosePopupProfileInfo = document.querySelector('.popup__button-close_theme_profile-info');
-const cards = document.querySelector('.cards');
-const buttonAddCard = document.querySelector('.profile__add-button');
-const popupAddCard = document.querySelector('.popup_theme_add-card');
-const buttonClosePopupAddCard = document.querySelector('.popup__button-close_theme_add-card');
-const formAddCard = document.querySelector('.popup_theme_add-card');
-const cardTitle = document.querySelector('.popup__item_el_title');
-const cardImage = document.querySelector('.popup__item_el_image');
-const popupThemeImage = document.querySelector('.popup_theme_image');
-const buttonClosePopupImage = document.querySelector('.popup__button-close_theme_image');
-const buttonSubmitAddCard = popupAddCard.querySelector('.popup__button');
+
 const profileInfoValidator = new FormValidator({
     inputSelector: '.popup__item',
     submitButtonSelector: '.popup__button',
@@ -31,6 +34,7 @@ const profileInfoValidator = new FormValidator({
     inputErrorClass: 'popup__item_type_error',
     errorClass: 'popup__item-error_active'
 }, formProfileInfo);
+
 const addCardValidator = new FormValidator({
     inputSelector: '.popup__item',
     submitButtonSelector: '.popup__button',
@@ -38,22 +42,26 @@ const addCardValidator = new FormValidator({
     inputErrorClass: 'popup__item_type_error',
     errorClass: 'popup__item-error_active'
 }, formAddCard);
+
 const userInfo = new UserInfo({
     userName: profileNameField,
     userJob: profileJobField
 });
+
 const PopupAddCard = new PopupWithForm(popupAddCard, (evt) => {
     evt.preventDefault();
     addCard().renderItems();
     addCardValidator.disableButton(buttonSubmitAddCard);
     PopupAddCard.close();
 });
+
 const PopupProfileInfo = new PopupWithForm(popupProfileInfo, (evt) => {
     evt.preventDefault();
     userInfo.setUserInfo(profileNameInput.value, profileJobInput.value);
     PopupProfileInfo.close();
 });
-export const PopupThemeImage = new PopupWithImage(popupThemeImage)
+
+const PopupThemeImage = new PopupWithImage(popupThemeImage);
 
 PopupAddCard.setEventListeners();
 PopupProfileInfo.setEventListeners();
