@@ -49,20 +49,20 @@ const userInfo = new UserInfo({
     userJob: profileJobField
 });
 
-const PopupAddCard = new PopupWithForm(popupAddCard, (evt) => {
+const PopupAddCard = new PopupWithForm('.popup_theme_add-card', (evt) => {
     evt.preventDefault();
     addCard().renderItems();
-    addCardValidator.disableButton(buttonSubmitAddCard);
+    addCardValidator.disableButton();
     PopupAddCard.close();
 });
 
-const PopupProfileInfo = new PopupWithForm(popupProfileInfo, (evt) => {
+const PopupProfileInfo = new PopupWithForm('.popup_theme_profile-info', (evt) => {
     evt.preventDefault();
     userInfo.setUserInfo(profileNameInput.value, profileJobInput.value);
     PopupProfileInfo.close();
 });
 
-const PopupThemeImage = new PopupWithImage(popupThemeImage);
+const PopupThemeImage = new PopupWithImage('.popup_theme_image');
 
 PopupAddCard.setEventListeners();
 PopupProfileInfo.setEventListeners();
