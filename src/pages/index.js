@@ -89,7 +89,7 @@ const addCardList = new Section({data: initialCards, renderer: ((item) => {
 
         addCardList.addItem(cardElement);
     })
-}, cards);
+}, '.cards');
 
 addCardList.renderItems();
 
@@ -104,7 +104,7 @@ function addCard() {
 
             addCardList.addItem(cardElement);
         })
-    }, cards);
+    }, '.cards');
 }
 
 function closePopupAddCard() {
