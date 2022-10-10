@@ -10,13 +10,6 @@ import {
     buttonOpenPopupProfile,
     cardImage,
     cardTitle,
-    cards,
-    popupAddCard,
-    profileJobField,
-    profileNameField,
-    popupThemeImage,
-    popupProfileInfo,
-    buttonSubmitAddCard,
     formProfileInfo,
     formAddCard,
     profileJobInput,
@@ -49,41 +42,39 @@ const userInfo = new UserInfo({
     userJobSelector: '.profile__description'
 });
 
-const PopupAddCard = new PopupWithForm('.popup_theme_add-card', (evt) => {
-    evt.preventDefault();
+const popupAddCard = new PopupWithForm('.popup_theme_add-card', () => {
     addCard().renderItems();
     addCardValidator.disableButton();
-    PopupAddCard.close();
+    popupAddCard.close();
 });
 
-const PopupProfileInfo = new PopupWithForm('.popup_theme_profile-info', (evt) => {
-    evt.preventDefault();
+const popupProfileInfo = new PopupWithForm('.popup_theme_profile-info', () => {
     userInfo.setUserInfo(profileNameInput.value, profileJobInput.value);
-    PopupProfileInfo.close();
+    popupProfileInfo.close();
 });
 
-const PopupThemeImage = new PopupWithImage('.popup_theme_image');
+const popupThemeImage = new PopupWithImage('.popup_theme_image');
 
-PopupAddCard.setEventListeners();
-PopupProfileInfo.setEventListeners();
-PopupThemeImage.setEventListeners();
+popupAddCard.setEventListeners();
+popupProfileInfo.setEventListeners();
+popupThemeImage.setEventListeners();
 
 function openPopupProfileInfo() {
-    PopupProfileInfo.open();
+    popupProfileInfo.open();
     initProfileInfo();
 }
 
 function closePopupProfileInfo() {
-    PopupProfileInfo.close()
+    popupProfileInfo.close()
 }
 
 function openPopupAddCard() {
-    PopupAddCard.open();
+    popupAddCard.open();
 }
 
 const addCardList = new Section({data: initialCards, renderer: ((item) => {
     const card = new Card(item.name, item.link, '#card', () => {
-        PopupThemeImage.open(item.link, item.name);
+        popupThemeImage.open(item.link, item.name);
     });
         const cardElement = card.generateCard();
 
@@ -98,7 +89,7 @@ function addCard() {
         data: [{name: cardTitle.value,
             link: cardImage.value}], renderer: ((item) => {
             const card = new Card(item.name, item.link, '#card', () => {
-                PopupThemeImage.open(item.link, item.name);
+                popupThemeImage.open(item.link, item.name);
             });
             const cardElement = card.generateCard();
 
@@ -108,11 +99,11 @@ function addCard() {
 }
 
 function closePopupAddCard() {
-    PopupAddCard.close();
+    popupAddCard.close();
 }
 
 function closePopupImage() {
-    PopupThemeImage.close();
+    popupThemeImage.close();
 }
 
 function initProfileInfo() {

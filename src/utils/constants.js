@@ -1,5 +1,3 @@
-export const popupImage = document.querySelector('.popup__image');
-export const popupCaption = document.querySelector('.popup__caption');
 export const buttonOpenPopupProfile = document.querySelector('.profile__edit-button');
 export const popupProfileInfo = document.querySelector('.popup_theme_profile-info');
 export const formProfileInfo = document.querySelector('.popup__form_theme_profile-info');
