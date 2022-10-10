@@ -45,8 +45,8 @@ const addCardValidator = new FormValidator({
 }, formAddCard);
 
 const userInfo = new UserInfo({
-    userName: profileNameField,
-    userJob: profileJobField
+    userNameSelector: '.profile__name',
+    userJobSelector: '.profile__description'
 });
 
 const PopupAddCard = new PopupWithForm('.popup_theme_add-card', (evt) => {
@@ -117,8 +117,8 @@ function closePopupImage() {
 
 function initProfileInfo() {
     const info = userInfo.getUserInfo();
-    profileNameInput.value = info.name.textContent;
-    profileJobInput.value = info.job.textContent;
+    profileNameInput.value = info.name;
+    profileJobInput.value = info.job;
 }
 
 function initValidation() {
