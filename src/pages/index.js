@@ -8,16 +8,11 @@ import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
 import {
     buttonOpenPopupProfile,
-    cardImage,
-    cardTitle,
     formProfileInfo,
     formAddCard,
     profileJobInput,
     profileNameInput,
-    buttonAddCard,
-    buttonClosePopupAddCard,
-    buttonClosePopupImage,
-    buttonClosePopupProfileInfo
+    buttonAddCard
 } from '../utils/constants.js'
 
 
@@ -42,14 +37,14 @@ const userInfo = new UserInfo({
     userJobSelector: '.profile__description'
 });
 
-const popupAddCard = new PopupWithForm('.popup_theme_add-card', () => {
-    addCard().renderItems();
+const popupAddCard = new PopupWithForm('.popup_theme_add-card', (inputsValues) => {
+    cardListAdd.addItem(createCard(inputsValues))
     addCardValidator.disableButton();
     popupAddCard.close();
 });
 
-const popupProfileInfo = new PopupWithForm('.popup_theme_profile-info', () => {
-    userInfo.setUserInfo(profileNameInput.value, profileJobInput.value);
+const popupProfileInfo = new PopupWithForm('.popup_theme_profile-info', (inputsValues) => {
+    userInfo.setUserInfo(inputsValues.name, inputsValues.job);
     popupProfileInfo.close();
 });
 
@@ -64,47 +59,26 @@ function openPopupProfileInfo() {
     initProfileInfo();
 }
 
-function closePopupProfileInfo() {
-    popupProfileInfo.close()
-}
-
 function openPopupAddCard() {
     popupAddCard.open();
 }
 
-const addCardList = new Section({data: initialCards, renderer: ((item) => {
-    const card = new Card(item.name, item.link, '#card', () => {
-        popupThemeImage.open(item.link, item.name);
+function createCard(item) {
+    const card = new Card(item.title, item.image, '#card', () => {
+        popupThemeImage.open(item.title, item.image);
     });
-        const cardElement = card.generateCard();
 
-        addCardList.addItem(cardElement);
+    return card.generateCard();
+}
+
+const cardListAdd = new Section({
+    data: initialCards, renderer: ((item) => {
+
+        cardListAdd.addItem(createCard(item));
     })
 }, '.cards');
 
-addCardList.renderItems();
-
-function addCard() {
-    return new Section({
-        data: [{name: cardTitle.value,
-            link: cardImage.value}], renderer: ((item) => {
-            const card = new Card(item.name, item.link, '#card', () => {
-                popupThemeImage.open(item.link, item.name);
-            });
-            const cardElement = card.generateCard();
-
-            addCardList.addItem(cardElement);
-        })
-    }, '.cards');
-}
-
-function closePopupAddCard() {
-    popupAddCard.close();
-}
-
-function closePopupImage() {
-    popupThemeImage.close();
-}
+cardListAdd.renderItems();
 
 function initProfileInfo() {
     const info = userInfo.getUserInfo();
@@ -117,10 +91,7 @@ function initValidation() {
     profileInfoValidator.enableValidation();
 }
 
-initProfileInfo();
+initProfileInfo(); // Эта функция вызывается с открытием страницы для того чтобы кнопка становилась активной при первом открытии popupProfileInfo, если это убрать, она будет не активна
 initValidation();
 buttonOpenPopupProfile.addEventListener('click', openPopupProfileInfo);
 buttonAddCard.addEventListener('click', openPopupAddCard);
-buttonClosePopupProfileInfo.addEventListener('click', closePopupProfileInfo);
-buttonClosePopupAddCard.addEventListener('click', closePopupAddCard);
-buttonClosePopupImage.addEventListener('click', closePopupImage);
