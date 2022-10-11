@@ -39,7 +39,6 @@ const userInfo = new UserInfo({
 
 const popupAddCard = new PopupWithForm('.popup_theme_add-card', (inputsValues) => {
     cardListAdd.addItem(createCard(inputsValues))
-    addCardValidator.disableButton();
     popupAddCard.close();
 });
 
@@ -61,6 +60,7 @@ function openPopupProfileInfo() {
 
 function openPopupAddCard() {
     popupAddCard.open();
+    addCardValidator.disableButton();
 }
 
 function createCard(item) {
