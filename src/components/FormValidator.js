@@ -48,6 +48,16 @@ export default class FormValidator {
         }
     }
 
+    resetValidation() {
+        this._toggleSubmitButton();
+
+        this._inputList.forEach((inputElement) => {
+            const errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);
+            this._hideInputError(inputElement, errorElement)
+        });
+
+    }
+
     _setEventListeners() {
         this._inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
         this._submitButton = this._formElement.querySelector(this._submitButtonSelector);

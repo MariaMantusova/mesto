@@ -56,11 +56,12 @@ popupThemeImage.setEventListeners();
 function openPopupProfileInfo() {
     popupProfileInfo.open();
     initProfileInfo();
+    profileInfoValidator.resetValidation()
 }
 
 function openPopupAddCard() {
     popupAddCard.open();
-    addCardValidator.disableButton();
+    addCardValidator.resetValidation()
 }
 
 function createCard(item) {
@@ -91,7 +92,6 @@ function initValidation() {
     profileInfoValidator.enableValidation();
 }
 
-initProfileInfo(); // Эта функция вызывается с открытием страницы для того чтобы кнопка становилась активной при первом открытии popupProfileInfo, если это убрать, она будет не активна
 initValidation();
 buttonOpenPopupProfile.addEventListener('click', openPopupProfileInfo);
 buttonAddCard.addEventListener('click', openPopupAddCard);
