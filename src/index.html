@@ -86,6 +86,19 @@
         </div>
     </div>
 
+    <div class="popup popup_theme_edit-photo">
+        <div class="popup__container">
+            <button type="button" class="popup__button-close popup__button-close_theme_edit-button"></button>
+            <h2 class="popup__title popup__title_theme_edit-photo">Обновить аватар</h2>
+            <form class="popup__form">
+                <input type="url" id="edit-photo-input-link" name="photo" class="popup__item popup__item_el_image"
+                       placeholder="Ссылка на аватар" required>
+                <span class="edit-photo-input-link-error popup__item-error"></span>
+                <button class="popup__button popup__button_theme_edit-photo">Сохранить</button>
+            </form>
+        </div>
+    </div>
+
     <template id="card">
         <article class="card">
             <button aria-label="удалить" type="button" class="card__delete-button"></button>
