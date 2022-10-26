@@ -20,4 +20,20 @@ export default class Api {
             })
             .catch((err) => Promise.reject(err))
     }
+
+    getCards() {
+        return fetch(this._url, {
+            headers: {
+                authorization: this._token
+            }
+        })
+            .then((res) => {
+                if (res.ok) {
+                    return res.json()
+                } else {
+                    return Promise.reject(new Error(res.status.toString()))
+                }
+            })
+            .catch((err) => Promise.reject(err))
+    }
 }

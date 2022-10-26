@@ -19,7 +19,7 @@ import {
 } from '../utils/constants.js';
 import Api from "../components/Api.js";
 
-const API_OPTIONS = {
+const apiOptionUserInfo = {
     url: 'https://nomoreparties.co/v1/cohort-52/users/me',
     token: 'de7171b1-a6ca-4de6-b3e1-0107fb201661',
     headers: {
@@ -27,10 +27,19 @@ const API_OPTIONS = {
     },
 }
 
-const api = new Api(API_OPTIONS);
+const apiOptionCards = {
+    url: 'https://nomoreparties.co/v1/cohort-52//cards',
+    token: 'de7171b1-a6ca-4de6-b3e1-0107fb201661',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+}
+
+const apiUserInfo = new Api(apiOptionUserInfo);
+const apiCards = new Api(apiOptionCards);
 
 function setUserInfo() {
-    api.getUserInfo().then((data) => {
+    apiUserInfo.getUserInfo().then((data) => {
         profilePhotoField.src = data.avatar;
         profileJobField.textContent = data.about;
         profileNameField.textContent = data.name;
