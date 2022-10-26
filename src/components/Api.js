@@ -36,4 +36,23 @@ export default class Api {
             })
             .catch((err) => Promise.reject(err))
     }
+
+    changeUserInfo(name, about) {
+        return fetch(this._url, {
+            method: 'PATCH',
+            headers: this._header,
+            body: JSON.stringify({
+                name: name,
+                about: about
+            })
+        })
+            .then((res) => {
+                if (res.ok) {
+                    return res.json()
+                } else {
+                    return Promise.reject(new Error(res.status.toString()))
+                }
+            })
+            .catch((err) => Promise.reject(err))
+    }
 }
