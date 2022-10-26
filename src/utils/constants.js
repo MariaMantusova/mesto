@@ -4,3 +4,6 @@ export const profileNameInput = document.querySelector('.popup__item_el_name');
 export const profileJobInput = document.querySelector('.popup__item_el_job');
 export const buttonAddCard = document.querySelector('.profile__add-button');
 export const formAddCard = document.querySelector('.popup_theme_add-card');
+export const profileNameField = document.querySelector('.profile__name');
+export const profileJobField = document.querySelector('.profile__description');
+export const profilePhotoField = document.querySelector('.profile__photo');

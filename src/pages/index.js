@@ -12,12 +12,15 @@ import {
     formAddCard,
     profileJobInput,
     profileNameInput,
-    buttonAddCard
+    buttonAddCard,
+    profileNameField,
+    profileJobField,
+    profilePhotoField
 } from '../utils/constants.js';
 import Api from "../components/Api.js";
 
 const API_OPTIONS = {
-    url: 'https://mesto.nomoreparties.co/v1/cohort-52/cards',
+    url: 'https://nomoreparties.co/v1/cohort-52/users/me',
     token: 'de7171b1-a6ca-4de6-b3e1-0107fb201661',
     headers: {
         'Content-Type': 'application/json',
@@ -25,6 +28,14 @@ const API_OPTIONS = {
 }
 
 const api = new Api(API_OPTIONS);
+
+function setUserInfo() {
+    api.getUserInfo().then((data) => {
+        profilePhotoField.src = data.avatar;
+        profileJobField.textContent = data.about;
+        profileNameField.textContent = data.name;
+    })
+}
 
 const profileInfoValidator = new FormValidator({
     inputSelector: '.popup__item',
@@ -102,6 +113,7 @@ function initValidation() {
     profileInfoValidator.enableValidation();
 }
 
+setUserInfo();
 initValidation();
 buttonOpenPopupProfile.addEventListener('click', openPopupProfileInfo);
 buttonAddCard.addEventListener('click', openPopupAddCard);
