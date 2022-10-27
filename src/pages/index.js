@@ -47,6 +47,12 @@ function setUserInfo() {
         profileNameField.textContent = data.name;
     })
 }
+let userId;
+
+apiUserInfo.getUserInfo().then((data) => {
+    userId = data._id
+})
+
 
 const profileInfoValidator = new FormValidator({
     inputSelector: '.popup__item',
@@ -101,7 +107,7 @@ function openPopupAddCard() {
 }
 
 function createCard(item, likes) {
-    const card = new Card(item, likes, '#card',
+    const card = new Card(item, likes, '#card', userId,
         () => {
             popupThemeImage.open(item.name, item.link);
         },
