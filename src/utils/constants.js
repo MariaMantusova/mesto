@@ -7,3 +7,4 @@ export const formAddCard = document.querySelector('.popup_theme_add-card');
 export const profileNameField = document.querySelector('.profile__name');
 export const profileJobField = document.querySelector('.profile__description');
 export const profilePhotoField = document.querySelector('.profile__photo');
+export const buttonOpenConfirmDeletingPopup = document.querySelector('.profile__photo');

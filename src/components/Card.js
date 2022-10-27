@@ -1,7 +1,8 @@
 export default class Card {
-    constructor(cardElement, likes, templateSelector, handleCardClick) {
+    constructor(cardElement, likes, templateSelector, handleCardClick, _handleTrashButtonClick) {
         this._name = cardElement.name;
         this._image = cardElement.link;
+        this._handleTrashButtonClick = _handleTrashButtonClick ;
         this._templateSelector = templateSelector;
         this._handleCardClick = handleCardClick;
         this._likes = likes
@@ -53,11 +54,13 @@ export default class Card {
     }
 
     _handleDeleteButtonClick() {
-        this._element.remove();
-        this._element = null;
+        this._handleTrashButtonClick();
     }
 
     _handleImageClick() {
         this._handleCardClick();
     }
 }
+
+// this._element.remove();
+// this._element = null;

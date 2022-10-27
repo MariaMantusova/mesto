@@ -17,6 +17,7 @@ import {
     profilePhotoField
 } from '../utils/constants.js';
 import Api from "../components/Api.js";
+import Popup from "../components/Popup";
 
 const apiOptionUserInfo = {
     url: 'https://nomoreparties.co/v1/cohort-52/users/me',
@@ -81,10 +82,12 @@ const popupProfileInfo = new PopupWithForm('.popup_theme_profile-info', (inputsV
 });
 
 const popupThemeImage = new PopupWithImage('.popup_theme_image');
+const popupConfirmDeleting = new Popup('.popup_theme_confirm');
 
 popupAddCard.setEventListeners();
 popupProfileInfo.setEventListeners();
 popupThemeImage.setEventListeners();
+popupConfirmDeleting.setEventListeners();
 
 function openPopupProfileInfo() {
     popupProfileInfo.open();
@@ -98,9 +101,13 @@ function openPopupAddCard() {
 }
 
 function createCard(item, likes) {
-    const card = new Card(item, likes, '#card', () => {
-        popupThemeImage.open(item.name, item.link);
-    });
+    const card = new Card(item, likes, '#card',
+        () => {
+            popupThemeImage.open(item.name, item.link);
+        },
+        () => {
+            popupConfirmDeleting.open();
+        });
 
     return card.generateCard();
 }
