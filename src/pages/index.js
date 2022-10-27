@@ -70,7 +70,7 @@ const userInfo = new UserInfo({
 
 const popupAddCard = new PopupWithForm('.popup_theme_add-card', (inputsValues) => {
     apiCards.saveNewCard(inputsValues.name, inputsValues.link).then(() => {});
-    cardListAdd.addItem(createCard(inputsValues));
+    cardListAdd.addItem(createCard(inputsValues, []));
     popupAddCard.close();
 });
 
@@ -97,8 +97,8 @@ function openPopupAddCard() {
     addCardValidator.resetValidation()
 }
 
-function createCard(item) {
-    const card = new Card(item.name, item.link, '#card', () => {
+function createCard(item, likes) {
+    const card = new Card(item, likes, '#card', () => {
         popupThemeImage.open(item.name, item.link);
     });
 
@@ -115,7 +115,7 @@ function newSection(cards) {
     return new Section({
         data: cards, renderer: ((item) => {
 
-            cardListAdd.addItem(createCard(item));
+            cardListAdd.addItem(createCard(item, item.likes));
         })
     }, '.cards');
 }
