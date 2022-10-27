@@ -31,6 +31,7 @@ const apiOptionCards = {
     url: 'https://nomoreparties.co/v1/cohort-52//cards',
     token: 'de7171b1-a6ca-4de6-b3e1-0107fb201661',
     headers: {
+        authorization: 'de7171b1-a6ca-4de6-b3e1-0107fb201661',
         'Content-Type': 'application/json',
     },
 }
@@ -68,7 +69,8 @@ const userInfo = new UserInfo({
 });
 
 const popupAddCard = new PopupWithForm('.popup_theme_add-card', (inputsValues) => {
-    cardListAdd.addItem(createCard(inputsValues))
+    apiCards.saveNewCard(inputsValues.name, inputsValues.link).then(() => {});
+    cardListAdd.addItem(createCard(inputsValues));
     popupAddCard.close();
 });
 

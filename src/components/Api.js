@@ -55,4 +55,23 @@ export default class Api {
             })
             .catch((err) => Promise.reject(err))
     }
+
+    saveNewCard(name, link) {
+        return fetch(this._url, {
+            method: 'POST',
+            headers: this._header,
+            body: JSON.stringify({
+                name: name,
+                link: link
+            })
+        })
+            .then((res) => {
+                if (res.ok) {
+                    return res.json()
+                } else {
+                    return Promise.reject(new Error(res.status.toString()))
+                }
+            })
+            .catch((err) => Promise.reject(err))
+    }
 }
