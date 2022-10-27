@@ -97,21 +97,27 @@ function openPopupAddCard() {
 }
 
 function createCard(item) {
-    const card = new Card(item.title, item.image, '#card', () => {
-        popupThemeImage.open(item.title, item.image);
+    const card = new Card(item.name, item.link, '#card', () => {
+        popupThemeImage.open(item.name, item.link);
     });
 
     return card.generateCard();
 }
+let cardListAdd;
 
-const cardListAdd = new Section({
-    data: initialCards, renderer: ((item) => {
+apiCards.getCards().then((cards) => {
+    cardListAdd = newSection(cards)
+    cardListAdd.renderItems();
+})
 
-        cardListAdd.addItem(createCard(item));
-    })
-}, '.cards');
+function newSection(cards) {
+    return new Section({
+        data: cards, renderer: ((item) => {
 
-cardListAdd.renderItems();
+            cardListAdd.addItem(createCard(item));
+        })
+    }, '.cards');
+}
 
 function initProfileInfo() {
     const info = userInfo.getUserInfo();
