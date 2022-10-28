@@ -74,4 +74,19 @@ export default class Api {
             })
             .catch((err) => Promise.reject(err))
     }
+
+    deleteCard(id) {
+        return fetch(`${this._url}/${id}`, {
+            method: 'DELETE',
+            headers: this._header,
+        })
+            .then((res) => {
+                if (res.ok) {
+                    return res.json()
+                } else {
+                    return Promise.reject(new Error(res.status.toString()))
+                }
+            })
+            .catch((err) => Promise.reject(err))
+    }
 }

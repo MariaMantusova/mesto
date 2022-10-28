@@ -14,10 +14,10 @@ import {
     buttonAddCard,
     profileNameField,
     profileJobField,
-    profilePhotoField
+    profilePhotoField,
 } from '../utils/constants.js';
 import Api from "../components/Api.js";
-import Popup from "../components/Popup";
+import PopupWithConfirmation from "../components/PopupWithConfirmation.js";
 
 const apiOptionUserInfo = {
     url: 'https://nomoreparties.co/v1/cohort-52/users/me',
@@ -88,7 +88,7 @@ const popupProfileInfo = new PopupWithForm('.popup_theme_profile-info', (inputsV
 });
 
 const popupThemeImage = new PopupWithImage('.popup_theme_image');
-const popupConfirmDeleting = new Popup('.popup_theme_confirm');
+const popupConfirmDeleting = new PopupWithConfirmation('.popup_theme_confirm');
 
 popupAddCard.setEventListeners();
 popupProfileInfo.setEventListeners();
@@ -107,16 +107,18 @@ function openPopupAddCard() {
 }
 
 function createCard(item, likes, userId) {
-   const card = new Card(item, likes, '#card', ownerId, userId,
+    const card = new Card(item, likes, '#card', ownerId, userId, apiCards, popupConfirmDeleting,
         () => {
             popupThemeImage.open(item.name, item.link);
         },
         () => {
-            popupConfirmDeleting.open();
-        });
+            popupConfirmDeleting.open()
+        }
+    )
 
     return card.generateCard();
 }
+
 let cardListAdd;
 
 apiCards.getCards().then((cards) => {
