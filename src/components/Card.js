@@ -1,9 +1,9 @@
 export default class Card {
-    constructor(cardElement, likes, templateSelector, userId, handleCardClick, _handleTrashButtonClick) {
+    constructor(cardElement, likes, templateSelector, ownerId, userId, handleCardClick, _handleTrashButtonClick) {
         this._name = cardElement.name;
         this._image = cardElement.link;
         this._userId = userId
-        this._ownerId = cardElement.owner._id
+        this._ownerId = ownerId
         this._handleTrashButtonClick = _handleTrashButtonClick ;
         this._templateSelector = templateSelector;
         this._handleCardClick = handleCardClick;

@@ -47,12 +47,11 @@ function setUserInfo() {
         profileNameField.textContent = data.name;
     })
 }
-let userId;
+let ownerId;
 
 apiUserInfo.getUserInfo().then((data) => {
-    userId = data._id
+    ownerId = data._id
 })
-
 
 const profileInfoValidator = new FormValidator({
     inputSelector: '.popup__item',
@@ -76,8 +75,9 @@ const userInfo = new UserInfo({
 });
 
 const popupAddCard = new PopupWithForm('.popup_theme_add-card', (inputsValues) => {
-    apiCards.saveNewCard(inputsValues.name, inputsValues.link).then(() => {});
-    cardListAdd.addItem(createCard(inputsValues, []));
+    apiCards.saveNewCard(inputsValues.name, inputsValues.link).then((card) => {
+        cardListAdd.addItem(createCard(inputsValues, card.likes, card.owner._id));
+    });
     popupAddCard.close();
 });
 
@@ -106,8 +106,8 @@ function openPopupAddCard() {
     addCardValidator.resetValidation()
 }
 
-function createCard(item, likes) {
-    const card = new Card(item, likes, '#card', userId,
+function createCard(item, likes, userId) {
+   const card = new Card(item, likes, '#card', ownerId, userId,
         () => {
             popupThemeImage.open(item.name, item.link);
         },
@@ -127,8 +127,7 @@ apiCards.getCards().then((cards) => {
 function newSection(cards) {
     return new Section({
         data: cards, renderer: ((item) => {
-
-            cardListAdd.addItem(createCard(item, item.likes));
+            cardListAdd.addItem(createCard(item, item.likes, item.owner._id));
         })
     }, '.cards');
 }
