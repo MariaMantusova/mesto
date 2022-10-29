@@ -1,16 +1,17 @@
 export default class Card {
-    constructor(cardElement, likes, templateSelector, ownerId, userId, api, popupButton, handleCardClick, handleTrashButtonClick) {
-        this._id = cardElement._id;
+    constructor(cardElement, likes, templateSelector, ownerId, userId, id, handleCardClick) {
         this._name = cardElement.name;
         this._image = cardElement.link;
         this._userId = userId;
+        this._id = id;
         this._ownerId = ownerId;
-        this._handleTrashButtonClick = handleTrashButtonClick ;
         this._templateSelector = templateSelector;
         this._handleCardClick = handleCardClick;
         this._likes = likes;
-        this._api = api;
-        this._popupButton = popupButton;
+    }
+
+    setHandleTrashButtonClick(_handleTrashButtonClick) {
+        this._handleTrashButtonClick = _handleTrashButtonClick
     }
 
     _getTemplate() {
@@ -70,14 +71,11 @@ export default class Card {
         this._handleTrashButtonClick();
     }
 
-    _handleCardDelete() {
-        this._api.deleteCard(this._id).then(() => {
-            this._element.remove();
-            this._element = null;
-        })
-    }
-
     _handleImageClick() {
         this._handleCardClick();
+    }
+
+    remove() {
+        this._element.remove();
     }
 }

@@ -14,7 +14,7 @@ import {
     buttonAddCard,
     profileNameField,
     profileJobField,
-    profilePhotoField,
+    profilePhotoField
 } from '../utils/constants.js';
 import Api from "../components/Api.js";
 import PopupWithConfirmation from "../components/PopupWithConfirmation.js";
@@ -76,7 +76,7 @@ const userInfo = new UserInfo({
 
 const popupAddCard = new PopupWithForm('.popup_theme_add-card', (inputsValues) => {
     apiCards.saveNewCard(inputsValues.name, inputsValues.link).then((card) => {
-        cardListAdd.addItem(createCard(inputsValues, card.likes, card.owner._id));
+        cardListAdd.addItem(createCard(inputsValues, card.likes, card.owner._id, card._id));
     });
     popupAddCard.close();
 });
@@ -88,7 +88,7 @@ const popupProfileInfo = new PopupWithForm('.popup_theme_profile-info', (inputsV
 });
 
 const popupThemeImage = new PopupWithImage('.popup_theme_image');
-const popupConfirmDeleting = new PopupWithConfirmation('.popup_theme_confirm');
+const popupConfirmDeleting = new PopupWithConfirmation('.popup_theme_confirm', apiCards);
 
 popupAddCard.setEventListeners();
 popupProfileInfo.setEventListeners();
@@ -106,19 +106,17 @@ function openPopupAddCard() {
     addCardValidator.resetValidation()
 }
 
-function createCard(item, likes, userId) {
-    const card = new Card(item, likes, '#card', ownerId, userId, apiCards, popupConfirmDeleting,
+function createCard(item, likes, userId, cardId) {
+    const card = new Card(item, likes, '#card', ownerId, userId, cardId,
         () => {
             popupThemeImage.open(item.name, item.link);
-        },
-        () => {
-            popupConfirmDeleting.open()
-        }
-    )
+        });
+    card.setHandleTrashButtonClick(() => {
+        popupConfirmDeleting.open(card);
+    })
 
     return card.generateCard();
 }
-
 let cardListAdd;
 
 apiCards.getCards().then((cards) => {
@@ -129,7 +127,7 @@ apiCards.getCards().then((cards) => {
 function newSection(cards) {
     return new Section({
         data: cards, renderer: ((item) => {
-            cardListAdd.addItem(createCard(item, item.likes, item.owner._id));
+            cardListAdd.addItem(createCard(item, item.likes, item.owner._id, item._id));
         })
     }, '.cards');
 }
