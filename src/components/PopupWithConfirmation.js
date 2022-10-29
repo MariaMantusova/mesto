@@ -18,11 +18,11 @@ export default class PopupWithConfirmation extends Popup {
 
     setEventListeners() {
         super.setEventListeners();
-        this._popup.addEventListener('click', () => {
+        this._popup.addEventListener('click', (evt) => {
+            evt.preventDefault();
             this._api.deleteCard(this._card._id)
                 .then(() => {
-                    this._popup.querySelector('.popup__button_theme_confirm').setAttribute('disabled', 'disabled');
-                    this._card.remove()
+                    this._card.remove();
                 })
                 .catch((err) => {
                     console.log(err)
@@ -30,6 +30,7 @@ export default class PopupWithConfirmation extends Popup {
                 .finally(() => {
                     this._popup.classList.remove('popup_opened');
                 })
+            this._popup.querySelector('.popup__button_theme_confirm').setAttribute('disabled', '');
         });
     }
 }
