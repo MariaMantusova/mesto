@@ -21,8 +21,9 @@ export default class PopupWithConfirmation extends Popup {
         this._popup.addEventListener('click', () => {
             this._api.deleteCard(this._card._id)
                 .then(() => {
-                this._card.remove()
-            })
+                    this._popup.querySelector('.popup__button_theme_confirm').setAttribute('disabled', 'disabled');
+                    this._card.remove()
+                })
                 .catch((err) => {
                     console.log(err)
                 })

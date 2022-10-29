@@ -14,7 +14,8 @@ import {
     buttonAddCard,
     profileNameField,
     profileJobField,
-    profilePhotoField
+    profilePhotoField,
+    buttonConfirmDeleting
 } from '../utils/constants.js';
 import Api from "../components/Api.js";
 import PopupWithConfirmation from "../components/PopupWithConfirmation.js";
@@ -112,6 +113,7 @@ function createCard(item, likes, userId, cardId) {
             popupThemeImage.open(item.name, item.link);
         });
     card.setHandleTrashButtonClick(() => {
+        buttonConfirmDeleting.removeAttribute('disabled');
         popupConfirmDeleting.open(card);
     })
 
