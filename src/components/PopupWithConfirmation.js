@@ -20,6 +20,7 @@ export default class PopupWithConfirmation extends Popup {
         super.setEventListeners();
         this._popup.addEventListener('click', (evt) => {
             evt.preventDefault();
+            this._popup.querySelector('.popup__button_theme_confirm').setAttribute('disabled', '');
             this._api.deleteCard(this._card._id)
                 .then(() => {
                     this._card.remove();
@@ -30,7 +31,6 @@ export default class PopupWithConfirmation extends Popup {
                 .finally(() => {
                     this._popup.classList.remove('popup_opened');
                 })
-            this._popup.querySelector('.popup__button_theme_confirm').setAttribute('disabled', '');
         });
     }
 }
