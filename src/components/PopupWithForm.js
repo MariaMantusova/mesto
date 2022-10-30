@@ -11,7 +11,7 @@ export default class PopupWithForm extends Popup {
 
     open() {
         super.open();
-        this._popupButton.textContent = 'Сохранить'
+        this._popupButton.textContent = 'Сохранить';
     }
 
     _getInputValues() {
@@ -21,7 +21,7 @@ export default class PopupWithForm extends Popup {
             this._formValues[input.name] = input.value;
         });
 
-        return this._formValues
+        return this._formValues;
     }
 
     setEventListeners() {

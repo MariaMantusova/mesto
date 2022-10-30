@@ -13,12 +13,12 @@ export default class Api {
         })
             .then((res) => {
                 if (res.ok) {
-                    return res.json()
+                    return res.json();
                 } else {
-                    return Promise.reject(new Error(res.status.toString()))
+                    return Promise.reject(new Error(res.status.toString()));
                 }
             })
-            .catch((err) => Promise.reject(err))
+            .catch((err) => Promise.reject(err));
     }
 
     getCards() {
@@ -29,12 +29,12 @@ export default class Api {
         })
             .then((res) => {
                 if (res.ok) {
-                    return res.json()
+                    return res.json();
                 } else {
-                    return Promise.reject(new Error(res.status.toString()))
+                    return Promise.reject(new Error(res.status.toString()));
                 }
             })
-            .catch((err) => Promise.reject(err))
+            .catch((err) => Promise.reject(err));
     }
 
     changeUserInfo(name, about) {
@@ -48,12 +48,12 @@ export default class Api {
         })
             .then((res) => {
                 if (res.ok) {
-                    return res.json()
+                    return res.json();
                 } else {
-                    return Promise.reject(new Error(res.status.toString()))
+                    return Promise.reject(new Error(res.status.toString()));
                 }
             })
-            .catch((err) => Promise.reject(err))
+            .catch((err) => Promise.reject(err));
     }
 
     saveNewCard(name, link) {
@@ -67,12 +67,12 @@ export default class Api {
         })
             .then((res) => {
                 if (res.ok) {
-                    return res.json()
+                    return res.json();
                 } else {
-                    return Promise.reject(new Error(res.status.toString()))
+                    return Promise.reject(new Error(res.status.toString()));
                 }
             })
-            .catch((err) => Promise.reject(err))
+            .catch((err) => Promise.reject(err));
     }
 
     deleteCard(id) {
@@ -82,12 +82,12 @@ export default class Api {
         })
             .then((res) => {
                 if (res.ok) {
-                    return res.json()
+                    return res.json();
                 } else {
-                    return Promise.reject(new Error(res.status.toString()))
+                    return Promise.reject(new Error(res.status.toString()));
                 }
             })
-            .catch((err) => Promise.reject(err))
+            .catch((err) => Promise.reject(err));
     }
 
     addLike(cardId) {
@@ -97,12 +97,12 @@ export default class Api {
         })
             .then((res) => {
                 if (res.ok) {
-                    return res.json()
+                    return res.json();
                 } else {
-                    return Promise.reject(new Error(res.status.toString()))
+                    return Promise.reject(new Error(res.status.toString()));
                 }
             })
-            .catch((err) => Promise.reject(err))
+            .catch((err) => Promise.reject(err));
     }
 
     deleteLike(cardId) {
@@ -112,12 +112,12 @@ export default class Api {
         })
             .then((res) => {
                 if (res.ok) {
-                    return res.json()
+                    return res.json();
                 } else {
-                    return Promise.reject(new Error(res.status.toString()))
+                    return Promise.reject(new Error(res.status.toString()));
                 }
             })
-            .catch((err) => Promise.reject(err))
+            .catch((err) => Promise.reject(err));
     }
 
     changeProfilePhoto(avatar) {
@@ -130,11 +130,11 @@ export default class Api {
         })
             .then((res) => {
                 if (res.ok) {
-                    return res.json()
+                    return res.json();
                 } else {
-                    return Promise.reject(new Error(res.status.toString()))
+                    return Promise.reject(new Error(res.status.toString()));
                 }
             })
-            .catch((err) => Promise.reject(err))
+            .catch((err) => Promise.reject(err));
     }
 }

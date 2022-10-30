@@ -1,7 +1,7 @@
 import './index.css';
-import Card from '../components/Card.js'
-import FormValidator from '../components/FormValidator.js'
-import Section from '../components/Section.js'
+import Card from '../components/Card.js';
+import FormValidator from '../components/FormValidator.js';
+import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
@@ -20,7 +20,8 @@ import {
     profileAvatar,
     submitAddCard,
     submitProfileInfo,
-    submitPopupAvatar, formEditAvatar
+    submitPopupAvatar,
+    formEditAvatar
 } from '../utils/constants.js';
 import Api from "../components/Api.js";
 import PopupWithConfirmation from "../components/PopupWithConfirmation.js";
@@ -45,20 +46,6 @@ const apiOptionCards = {
 
 const apiUserInfo = new Api(apiOptionUserInfo);
 const apiCards = new Api(apiOptionCards);
-
-function setUserInfo() {
-    apiUserInfo.getUserInfo().then((data) => {
-        profilePhotoField.src = data.avatar;
-        profileJobField.textContent = data.about;
-        profileNameField.textContent = data.name;
-    })
-}
-
-let ownerId;
-
-apiUserInfo.getUserInfo().then((data) => {
-    ownerId = data._id
-})
 
 const profileInfoValidator = new FormValidator({
     inputSelector: '.popup__item',
@@ -93,8 +80,8 @@ const popupAddCard = new PopupWithForm('.popup_theme_add-card', (inputsValues) =
     renderLoading(true, submitAddCard);
     apiCards.saveNewCard(inputsValues.name, inputsValues.link)
         .then((card) => {
-        cardListAdd.addItem(createCard(inputsValues, card.likes, card.owner._id, card._id));
-    })
+            cardListAdd.addItem(createCard(inputsValues, card.likes, card.owner._id, card._id));
+        })
         .catch((err) => console.log(err))
         .finally(() => {
             renderLoading(false, submitAddCard);
@@ -105,7 +92,8 @@ const popupAddCard = new PopupWithForm('.popup_theme_add-card', (inputsValues) =
 const popupProfileInfo = new PopupWithForm('.popup_theme_profile-info', (inputsValues) => {
     renderLoading(true, submitProfileInfo);
     apiUserInfo.changeUserInfo(inputsValues.name, inputsValues.job)
-        .then(() => {})
+        .then(() => {
+        })
         .catch((err) => console.log(err))
         .finally(() => {
             renderLoading(false, submitProfileInfo);
@@ -118,8 +106,8 @@ const popupProfilePhoto = new PopupWithForm('.popup_theme_edit-photo', (inputsVa
     renderLoading(true, submitPopupAvatar);
     apiUserInfo.changeProfilePhoto(inputsValues.avatar)
         .then((data) => {
-        profileAvatar.src = data.avatar
-    })
+            profileAvatar.src = data.avatar
+        })
         .catch((err) => console.log(err))
         .finally(() => {
             renderLoading(false, submitPopupAvatar);
@@ -130,26 +118,48 @@ const popupProfilePhoto = new PopupWithForm('.popup_theme_edit-photo', (inputsVa
 const popupThemeImage = new PopupWithImage('.popup_theme_image');
 const popupConfirmDeleting = new PopupWithConfirmation('.popup_theme_confirm', apiCards);
 
-popupAddCard.setEventListeners();
-popupProfileInfo.setEventListeners();
-popupThemeImage.setEventListeners();
-popupConfirmDeleting.setEventListeners();
-popupProfilePhoto.setEventListeners();
-
 function openPopupProfileInfo() {
     popupProfileInfo.open();
+    popupProfileInfo.setEventListeners();
     initProfileInfo();
-    profileInfoValidator.resetValidation()
+    profileInfoValidator.resetValidation();
 }
 
 function openPopupAddCard() {
     popupAddCard.open();
-    addCardValidator.resetValidation()
+    popupAddCard.setEventListeners();
+    addCardValidator.resetValidation();
 }
 
 function openPopupChangeAvatar() {
-    popupProfilePhoto.open()
-    changePhotoValidator.resetValidation()
+    popupProfilePhoto.open();
+    popupProfilePhoto.setEventListeners();
+    changePhotoValidator.resetValidation();
+}
+
+let ownerId;
+
+apiUserInfo.getUserInfo()
+    .then((data) => {
+        ownerId = data._id
+    })
+    .catch((err) => console.log(err));
+
+let cardListAdd;
+
+apiCards.getCards()
+    .then((cards) => {
+        cardListAdd = newSection(cards);
+        cardListAdd.renderItems();
+    })
+    .catch((err) => console.log(err));
+
+function newSection(cards) {
+    return new Section({
+        data: cards, renderer: ((item) => {
+            cardListAdd.addItem(createCard(item, item.likes, item.owner._id, item._id));
+        })
+    }, '.cards');
 }
 
 function createCard(item, likes, userId, cardId) {
@@ -164,25 +174,29 @@ function createCard(item, likes, userId, cardId) {
 
     return card.generateCard();
 }
-let cardListAdd;
-
-apiCards.getCards().then((cards) => {
-    cardListAdd = newSection(cards)
-    cardListAdd.renderItems();
-})
-
-function newSection(cards) {
-    return new Section({
-        data: cards, renderer: ((item) => {
-            cardListAdd.addItem(createCard(item, item.likes, item.owner._id, item._id));
-        })
-    }, '.cards');
-}
 
 function initProfileInfo() {
     const info = userInfo.getUserInfo();
     profileNameInput.value = info.name;
     profileJobInput.value = info.job;
+}
+
+function renderLoading(isLoading, button) {
+    if (isLoading) {
+        button.textContent = 'Сохранение...';
+    } else {
+        button.textContent = 'Сохранено';
+    }
+}
+
+function setUserInfo() {
+    apiUserInfo.getUserInfo()
+        .then((data) => {
+            profilePhotoField.src = data.avatar;
+            profileJobField.textContent = data.about;
+            profileNameField.textContent = data.name;
+        })
+        .catch((err) => console.log(err));
 }
 
 function initValidation() {
@@ -191,16 +205,10 @@ function initValidation() {
     changePhotoValidator.enableValidation();
 }
 
-function renderLoading(isLoading, button) {
-    if (isLoading) {
-        button.textContent = 'Сохранение...'
-    } else {
-        button.textContent = 'Сохранено'
-    }
-}
-
 setUserInfo();
 initValidation();
+popupThemeImage.setEventListeners();
+popupConfirmDeleting.setEventListeners();
 buttonOpenPopupProfile.addEventListener('click', openPopupProfileInfo);
 buttonAddCard.addEventListener('click', openPopupAddCard);
 buttonPopupAvatar.addEventListener('click', openPopupChangeAvatar);

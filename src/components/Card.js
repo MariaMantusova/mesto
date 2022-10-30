@@ -13,7 +13,7 @@ export default class Card {
     }
 
     setHandleTrashButtonClick(_handleTrashButtonClick) {
-        this._handleTrashButtonClick = _handleTrashButtonClick
+        this._handleTrashButtonClick = _handleTrashButtonClick;
     }
 
     _getTemplate() {
@@ -56,8 +56,8 @@ export default class Card {
     }
 
     _checkIfIsLiked() {
-        return  this._likes.some((like) => {
-           return like._id === this._ownerId;
+        return this._likes.some((like) => {
+            return like._id === this._ownerId;
         })
     }
 
@@ -69,25 +69,29 @@ export default class Card {
     }
 
     _handleLikeClick() {
-       if (this._likeButton.classList.contains('card__like_active')) {
-           this._removeLike();
-       } else {
-           this._addLike();
-       }
+        if (this._likeButton.classList.contains('card__like_active')) {
+            this._removeLike();
+        } else {
+            this._addLike();
+        }
     }
 
     _addLike() {
-        this._api.addLike(this._cardElement._id).then((card) => {
-            this._likeButton.classList.add('card__like_active');
-            this._element.querySelector('.card__like_sum').textContent = card.likes.length
-        })
+        this._api.addLike(this._cardElement._id)
+            .then((card) => {
+                this._likeButton.classList.add('card__like_active');
+                this._element.querySelector('.card__like_sum').textContent = card.likes.length;
+            })
+            .catch((err) => console.log(err));
     }
 
     _removeLike() {
-        this._api.deleteLike(this._cardElement._id).then((card) => {
-            this._likeButton.classList.remove('card__like_active');
-            this._element.querySelector('.card__like_sum').textContent = card.likes.length
-        })
+        this._api.deleteLike(this._cardElement._id)
+            .then((card) => {
+                this._likeButton.classList.remove('card__like_active');
+                this._element.querySelector('.card__like_sum').textContent = card.likes.length;
+            })
+            .catch((err) => console.log(err));
     }
 
     _handleDeleteButtonClick() {

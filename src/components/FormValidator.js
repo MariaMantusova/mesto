@@ -37,7 +37,7 @@ export default class FormValidator {
     _isInputListInvalid(inputList) {
         return inputList.some((inputItem) => {
             return !inputItem.validity.valid
-        })
+        });
     }
 
     _setInputItemVisibility(inputItem, errorElement) {
@@ -53,7 +53,7 @@ export default class FormValidator {
 
         this._inputList.forEach((inputElement) => {
             const errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);
-            this._hideInputError(inputElement, errorElement)
+            this._hideInputError(inputElement, errorElement);
         });
 
     }
