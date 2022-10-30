@@ -8,3 +8,5 @@ export const profileNameField = document.querySelector('.profile__name');
 export const profileJobField = document.querySelector('.profile__description');
 export const profilePhotoField = document.querySelector('.profile__photo');
 export const buttonConfirmDeleting = document.querySelector('.popup__button_theme_confirm');
+export const buttonPopupAvatar = document.querySelector('.profile__photo-container');
+export const profileAvatar = document.querySelector('.profile__photo');

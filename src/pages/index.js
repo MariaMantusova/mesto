@@ -15,7 +15,9 @@ import {
     profileNameField,
     profileJobField,
     profilePhotoField,
-    buttonConfirmDeleting
+    buttonConfirmDeleting,
+    buttonPopupAvatar,
+    profileAvatar
 } from '../utils/constants.js';
 import Api from "../components/Api.js";
 import PopupWithConfirmation from "../components/PopupWithConfirmation.js";
@@ -48,6 +50,7 @@ function setUserInfo() {
         profileNameField.textContent = data.name;
     })
 }
+
 let ownerId;
 
 apiUserInfo.getUserInfo().then((data) => {
@@ -88,6 +91,12 @@ const popupProfileInfo = new PopupWithForm('.popup_theme_profile-info', (inputsV
     popupProfileInfo.close();
 });
 
+const popupProfilePhoto = new PopupWithForm('.popup_theme_edit-photo', (inputsValues) => {
+    apiUserInfo.changeProfilePhoto(inputsValues.avatar).then(() => {})
+    profileAvatar.src = inputsValues.avatar
+    popupProfilePhoto.close();
+});
+
 const popupThemeImage = new PopupWithImage('.popup_theme_image');
 const popupConfirmDeleting = new PopupWithConfirmation('.popup_theme_confirm', apiCards);
 
@@ -95,6 +104,7 @@ popupAddCard.setEventListeners();
 popupProfileInfo.setEventListeners();
 popupThemeImage.setEventListeners();
 popupConfirmDeleting.setEventListeners();
+popupProfilePhoto.setEventListeners();
 
 function openPopupProfileInfo() {
     popupProfileInfo.open();
@@ -149,3 +159,6 @@ setUserInfo();
 initValidation();
 buttonOpenPopupProfile.addEventListener('click', openPopupProfileInfo);
 buttonAddCard.addEventListener('click', openPopupAddCard);
+buttonPopupAvatar.addEventListener('click', () => {
+    popupProfilePhoto.open()
+})

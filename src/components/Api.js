@@ -120,7 +120,7 @@ export default class Api {
             .catch((err) => Promise.reject(err))
     }
 
-    changeProfilePhoto() {
+    changeProfilePhoto(avatar) {
         return fetch(`${this._url}/avatar`, {
             method: 'PATCH',
             headers: this._header,
