@@ -35,7 +35,9 @@ export default class Card {
         this._element.querySelector('.card__title').textContent = this._name;
         this._element.querySelector('.card__like_sum').textContent = this._likes.length;
         this._checkIfIsOwner();
-
+        if (this._checkIfIsLiked()) {
+            this._likeButton.classList.add('card__like_active');
+        }
         return this._element;
     }
 
@@ -50,6 +52,12 @@ export default class Card {
 
         this._cardImage.addEventListener('click', () => {
             this._handleImageClick();
+        })
+    }
+
+    _checkIfIsLiked() {
+        return  this._likes.some((like) => {
+           return like._id === this._ownerId;
         })
     }
 
