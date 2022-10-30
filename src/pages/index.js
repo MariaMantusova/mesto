@@ -108,7 +108,7 @@ function openPopupAddCard() {
 }
 
 function createCard(item, likes, userId, cardId) {
-    const card = new Card(item, likes, '#card', ownerId, userId, cardId,
+    const card = new Card(item, likes, '#card', ownerId, userId, cardId, apiCards,
         () => {
             popupThemeImage.open(item.name, item.link);
         });

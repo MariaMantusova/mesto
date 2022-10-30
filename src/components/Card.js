@@ -1,5 +1,5 @@
 export default class Card {
-    constructor(cardElement, likes, templateSelector, ownerId, userId, id, handleCardClick) {
+    constructor(cardElement, likes, templateSelector, ownerId, userId, id, api, handleCardClick) {
         this._name = cardElement.name;
         this._image = cardElement.link;
         this._userId = userId;
@@ -8,6 +8,8 @@ export default class Card {
         this._templateSelector = templateSelector;
         this._handleCardClick = handleCardClick;
         this._likes = likes;
+        this._api = api;
+        this._cardElement = cardElement;
     }
 
     setHandleTrashButtonClick(_handleTrashButtonClick) {
@@ -59,12 +61,25 @@ export default class Card {
     }
 
     _handleLikeClick() {
-        this._handleLikesSum()
-        this._likeButton.classList.toggle('card__like_active');
+       if (this._likeButton.classList.contains('card__like_active')) {
+           this._removeLike();
+       } else {
+           this._addLike();
+       }
     }
 
-    _handleLikesSum() {
-        this._element.querySelector('.card__like_sum').textContent = this._likes.length + 1;
+    _addLike() {
+        this._api.addLike(this._cardElement._id).then((card) => {
+            this._likeButton.classList.add('card__like_active');
+            this._element.querySelector('.card__like_sum').textContent = card.likes.length
+        })
+    }
+
+    _removeLike() {
+        this._api.deleteLike(this._cardElement._id).then((card) => {
+            this._likeButton.classList.remove('card__like_active');
+            this._element.querySelector('.card__like_sum').textContent = card.likes.length
+        })
     }
 
     _handleDeleteButtonClick() {
