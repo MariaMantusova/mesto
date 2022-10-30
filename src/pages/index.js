@@ -17,7 +17,10 @@ import {
     profilePhotoField,
     buttonConfirmDeleting,
     buttonPopupAvatar,
-    profileAvatar
+    profileAvatar,
+    submitAddCard,
+    submitProfileInfo,
+    submitPopupAvatar
 } from '../utils/constants.js';
 import Api from "../components/Api.js";
 import PopupWithConfirmation from "../components/PopupWithConfirmation.js";
@@ -79,22 +82,40 @@ const userInfo = new UserInfo({
 });
 
 const popupAddCard = new PopupWithForm('.popup_theme_add-card', (inputsValues) => {
-    apiCards.saveNewCard(inputsValues.name, inputsValues.link).then((card) => {
+    renderLoading(true, submitAddCard);
+    apiCards.saveNewCard(inputsValues.name, inputsValues.link)
+        .then((card) => {
         cardListAdd.addItem(createCard(inputsValues, card.likes, card.owner._id, card._id));
-    });
+    })
+        .catch((err) => console.log(err))
+        .finally(() => {
+            renderLoading(false, submitAddCard);
+        });
     popupAddCard.close();
 });
 
 const popupProfileInfo = new PopupWithForm('.popup_theme_profile-info', (inputsValues) => {
-    apiUserInfo.changeUserInfo(inputsValues.name, inputsValues.job).then(() => {});
+    renderLoading(true, submitProfileInfo);
+    apiUserInfo.changeUserInfo(inputsValues.name, inputsValues.job)
+        .then(() => {})
+        .catch((err) => console.log(err))
+        .finally(() => {
+            renderLoading(false, submitProfileInfo);
+        });
     userInfo.setUserInfo(inputsValues.name, inputsValues.job);
     popupProfileInfo.close();
 });
 
 const popupProfilePhoto = new PopupWithForm('.popup_theme_edit-photo', (inputsValues) => {
-    apiUserInfo.changeProfilePhoto(inputsValues.avatar).then((data) => {
+    renderLoading(true, submitPopupAvatar);
+    apiUserInfo.changeProfilePhoto(inputsValues.avatar)
+        .then((data) => {
         profileAvatar.src = data.avatar
     })
+        .catch((err) => console.log(err))
+        .finally(() => {
+            renderLoading(false, submitPopupAvatar);
+        });
     popupProfilePhoto.close();
 });
 
@@ -154,6 +175,14 @@ function initProfileInfo() {
 function initValidation() {
     addCardValidator.enableValidation();
     profileInfoValidator.enableValidation();
+}
+
+function renderLoading(isLoading, button) {
+    if (isLoading) {
+        button.textContent = 'Сохранение...'
+    } else {
+        button.textContent = 'Сохранено'
+    }
 }
 
 setUserInfo();

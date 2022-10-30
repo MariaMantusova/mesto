@@ -10,3 +10,6 @@ export const profilePhotoField = document.querySelector('.profile__photo');
 export const buttonConfirmDeleting = document.querySelector('.popup__button_theme_confirm');
 export const buttonPopupAvatar = document.querySelector('.profile__photo-container');
 export const profileAvatar = document.querySelector('.profile__photo');
+export const submitAddCard = document.querySelector('.popup__button_theme_add-card');
+export const submitProfileInfo = document.querySelector('.popup__button_theme_profile-info');
+export const submitPopupAvatar = document.querySelector('.popup__button_theme_edit-photo')
