@@ -20,7 +20,7 @@ import {
     profileAvatar,
     submitAddCard,
     submitProfileInfo,
-    submitPopupAvatar
+    submitPopupAvatar, formEditAvatar
 } from '../utils/constants.js';
 import Api from "../components/Api.js";
 import PopupWithConfirmation from "../components/PopupWithConfirmation.js";
@@ -75,6 +75,14 @@ const addCardValidator = new FormValidator({
     inputErrorClass: 'popup__item_type_error',
     errorClass: 'popup__item-error_active'
 }, formAddCard);
+
+const changePhotoValidator = new FormValidator({
+    inputSelector: '.popup__item',
+    submitButtonSelector: '.popup__button',
+    inactiveButtonClass: 'popup__button_disabled',
+    inputErrorClass: 'popup__item_type_error',
+    errorClass: 'popup__item-error_active'
+}, formEditAvatar);
 
 const userInfo = new UserInfo({
     userNameSelector: '.profile__name',
@@ -139,6 +147,11 @@ function openPopupAddCard() {
     addCardValidator.resetValidation()
 }
 
+function openPopupChangeAvatar() {
+    popupProfilePhoto.open()
+    changePhotoValidator.resetValidation()
+}
+
 function createCard(item, likes, userId, cardId) {
     const card = new Card(item, likes, '#card', ownerId, userId, cardId, apiCards,
         () => {
@@ -175,6 +188,7 @@ function initProfileInfo() {
 function initValidation() {
     addCardValidator.enableValidation();
     profileInfoValidator.enableValidation();
+    changePhotoValidator.enableValidation();
 }
 
 function renderLoading(isLoading, button) {
@@ -189,6 +203,4 @@ setUserInfo();
 initValidation();
 buttonOpenPopupProfile.addEventListener('click', openPopupProfileInfo);
 buttonAddCard.addEventListener('click', openPopupAddCard);
-buttonPopupAvatar.addEventListener('click', () => {
-    popupProfilePhoto.open()
-})
+buttonPopupAvatar.addEventListener('click', openPopupChangeAvatar);
