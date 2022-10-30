@@ -92,8 +92,9 @@ const popupProfileInfo = new PopupWithForm('.popup_theme_profile-info', (inputsV
 });
 
 const popupProfilePhoto = new PopupWithForm('.popup_theme_edit-photo', (inputsValues) => {
-    apiUserInfo.changeProfilePhoto(inputsValues.avatar).then(() => {})
-    profileAvatar.src = inputsValues.avatar
+    apiUserInfo.changeProfilePhoto(inputsValues.avatar).then((data) => {
+        profileAvatar.src = data.avatar
+    })
     popupProfilePhoto.close();
 });
 
