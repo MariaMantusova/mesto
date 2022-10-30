@@ -119,4 +119,22 @@ export default class Api {
             })
             .catch((err) => Promise.reject(err))
     }
+
+    changeProfilePhoto() {
+        return fetch(`${this._url}/avatar`, {
+            method: 'PATCH',
+            headers: this._header,
+            body: JSON.stringify({
+                avatar: avatar
+            })
+        })
+            .then((res) => {
+                if (res.ok) {
+                    return res.json()
+                } else {
+                    return Promise.reject(new Error(res.status.toString()))
+                }
+            })
+            .catch((err) => Promise.reject(err))
+    }
 }
