@@ -36,7 +36,7 @@ const apiOptionUserInfo = {
 }
 
 const apiOptionCards = {
-    url: 'https://nomoreparties.co/v1/cohort-52//cards',
+    url: 'https://nomoreparties.co/v1/cohort-52/cards',
     token: 'de7171b1-a6ca-4de6-b3e1-0107fb201661',
     headers: {
         authorization: 'de7171b1-a6ca-4de6-b3e1-0107fb201661',
@@ -71,6 +71,16 @@ const changePhotoValidator = new FormValidator({
     errorClass: 'popup__item-error_active'
 }, formEditAvatar);
 
+function setUserInfo() {
+    apiUserInfo.getUserInfo()
+        .then((data) => {
+            profilePhotoField.src = data.avatar;
+            profileJobField.textContent = data.about;
+            profileNameField.textContent = data.name;
+        })
+        .catch((err) => console.log(err));
+}
+
 const userInfo = new UserInfo({
     userNameSelector: '.profile__name',
     userJobSelector: '.profile__description'
@@ -92,13 +102,13 @@ const popupAddCard = new PopupWithForm('.popup_theme_add-card', (inputsValues) =
 const popupProfileInfo = new PopupWithForm('.popup_theme_profile-info', (inputsValues) => {
     renderLoading(true, submitProfileInfo);
     apiUserInfo.changeUserInfo(inputsValues.name, inputsValues.job)
-        .then(() => {
+        .then((data) => {
+            userInfo.setUserInfo(data.name, data.about)
         })
         .catch((err) => console.log(err))
         .finally(() => {
             renderLoading(false, submitProfileInfo);
         });
-    userInfo.setUserInfo(inputsValues.name, inputsValues.job);
     popupProfileInfo.close();
 });
 
@@ -187,16 +197,6 @@ function renderLoading(isLoading, button) {
     } else {
         button.textContent = 'Сохранено';
     }
-}
-
-function setUserInfo() {
-    apiUserInfo.getUserInfo()
-        .then((data) => {
-            profilePhotoField.src = data.avatar;
-            profileJobField.textContent = data.about;
-            profileNameField.textContent = data.name;
-        })
-        .catch((err) => console.log(err));
 }
 
 function initValidation() {
