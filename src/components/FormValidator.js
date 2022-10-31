@@ -21,7 +21,9 @@ export default class FormValidator {
     }
 
     disableButton() {
-        this._submitButton.setAttribute('disabled', 'disabled');
+        this._submitButton = this._formElement.querySelector(this._submitButtonSelector);
+
+        this._submitButton.setAttribute('disabled', '');
         this._submitButton.classList.add(this._inactiveButtonClass);
     }
 
@@ -60,7 +62,6 @@ export default class FormValidator {
 
     _setEventListeners() {
         this._inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
-        this._submitButton = this._formElement.querySelector(this._submitButtonSelector);
 
         this._toggleSubmitButton();
 
