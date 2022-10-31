@@ -6,7 +6,7 @@ export default class Api {
     }
 
     getUserInfo() {
-        return fetch(this._url, {
+        return fetch(`${this._url}/users/me`, {
             headers: {
                 authorization: this._token
             }
@@ -22,7 +22,7 @@ export default class Api {
     }
 
     getCards() {
-        return fetch(this._url, {
+        return fetch(`${this._url}/cards`, {
             headers: {
                 authorization: this._token
             }
@@ -38,7 +38,7 @@ export default class Api {
     }
 
     changeUserInfo(name, about) {
-        return fetch(this._url, {
+        return fetch(`${this._url}/users/me`, {
             method: 'PATCH',
             headers: this._header,
             body: JSON.stringify({
@@ -57,7 +57,7 @@ export default class Api {
     }
 
     saveNewCard(name, link) {
-        return fetch(this._url, {
+        return fetch(`${this._url}/cards`, {
             method: 'POST',
             headers: this._header,
             body: JSON.stringify({
@@ -76,7 +76,7 @@ export default class Api {
     }
 
     deleteCard(id) {
-        return fetch(`${this._url}/${id}`, {
+        return fetch(`${this._url}/cards/${id}`, {
             method: 'DELETE',
             headers: this._header,
         })
@@ -91,7 +91,7 @@ export default class Api {
     }
 
     addLike(cardId) {
-        return fetch(`${this._url}/${cardId}/likes`, {
+        return fetch(`${this._url}/cards/${cardId}/likes`, {
             method: 'PUT',
             headers: this._header,
         })
@@ -106,7 +106,7 @@ export default class Api {
     }
 
     deleteLike(cardId) {
-        return fetch(`${this._url}/${cardId}/likes`, {
+        return fetch(`${this._url}/cards/${cardId}/likes`, {
             method: 'DELETE',
             headers: this._header,
         })
@@ -121,7 +121,7 @@ export default class Api {
     }
 
     changeProfilePhoto(avatar) {
-        return fetch(`${this._url}/avatar`, {
+        return fetch(`${this._url}/users/me/avatar`, {
             method: 'PATCH',
             headers: this._header,
             body: JSON.stringify({

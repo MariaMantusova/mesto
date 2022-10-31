@@ -26,8 +26,8 @@ import {
 import Api from "../components/Api.js";
 import PopupWithConfirmation from "../components/PopupWithConfirmation.js";
 
-const apiOptionUserInfo = {
-    url: 'https://nomoreparties.co/v1/cohort-52/users/me',
+const apiOption = {
+    url: 'https://nomoreparties.co/v1/cohort-52',
     token: 'de7171b1-a6ca-4de6-b3e1-0107fb201661',
     headers: {
         authorization: 'de7171b1-a6ca-4de6-b3e1-0107fb201661',
@@ -35,17 +35,7 @@ const apiOptionUserInfo = {
     },
 }
 
-const apiOptionCards = {
-    url: 'https://nomoreparties.co/v1/cohort-52/cards',
-    token: 'de7171b1-a6ca-4de6-b3e1-0107fb201661',
-    headers: {
-        authorization: 'de7171b1-a6ca-4de6-b3e1-0107fb201661',
-        'Content-Type': 'application/json',
-    },
-}
-
-const apiUserInfo = new Api(apiOptionUserInfo);
-const apiCards = new Api(apiOptionCards);
+const api = new Api(apiOption);
 
 const profileInfoValidator = new FormValidator({
     inputSelector: '.popup__item',
@@ -72,7 +62,7 @@ const changePhotoValidator = new FormValidator({
 }, formEditAvatar);
 
 function setUserInfo() {
-    apiUserInfo.getUserInfo()
+    api.getUserInfo()
         .then((data) => {
             profilePhotoField.src = data.avatar;
             profileJobField.textContent = data.about;
@@ -88,7 +78,7 @@ const userInfo = new UserInfo({
 
 const popupAddCard = new PopupWithForm('.popup_theme_add-card', (inputsValues) => {
     renderLoading(true, submitAddCard);
-    apiCards.saveNewCard(inputsValues.name, inputsValues.link)
+    api.saveNewCard(inputsValues.name, inputsValues.link)
         .then((card) => {
             cardListAdd.addItem(createCard(inputsValues, card.likes, card.owner._id, card._id));
         })
@@ -101,7 +91,7 @@ const popupAddCard = new PopupWithForm('.popup_theme_add-card', (inputsValues) =
 
 const popupProfileInfo = new PopupWithForm('.popup_theme_profile-info', (inputsValues) => {
     renderLoading(true, submitProfileInfo);
-    apiUserInfo.changeUserInfo(inputsValues.name, inputsValues.job)
+    api.changeUserInfo(inputsValues.name, inputsValues.job)
         .then((data) => {
             userInfo.setUserInfo(data.name, data.about)
         })
@@ -114,7 +104,7 @@ const popupProfileInfo = new PopupWithForm('.popup_theme_profile-info', (inputsV
 
 const popupProfilePhoto = new PopupWithForm('.popup_theme_edit-photo', (inputsValues) => {
     renderLoading(true, submitPopupAvatar);
-    apiUserInfo.changeProfilePhoto(inputsValues.avatar)
+    api.changeProfilePhoto(inputsValues.avatar)
         .then((data) => {
             profileAvatar.src = data.avatar
         })
@@ -126,7 +116,7 @@ const popupProfilePhoto = new PopupWithForm('.popup_theme_edit-photo', (inputsVa
 });
 
 const popupThemeImage = new PopupWithImage('.popup_theme_image');
-const popupConfirmDeleting = new PopupWithConfirmation('.popup_theme_confirm', apiCards);
+const popupConfirmDeleting = new PopupWithConfirmation('.popup_theme_confirm', api);
 
 function openPopupProfileInfo() {
     popupProfileInfo.open();
@@ -149,7 +139,7 @@ function openPopupChangeAvatar() {
 
 let ownerId;
 
-apiUserInfo.getUserInfo()
+api.getUserInfo()
     .then((data) => {
         ownerId = data._id
     })
@@ -157,7 +147,7 @@ apiUserInfo.getUserInfo()
 
 let cardListAdd;
 
-apiCards.getCards()
+api.getCards()
     .then((cards) => {
         cardListAdd = newSection(cards);
         cardListAdd.renderItems();
@@ -173,7 +163,7 @@ function newSection(cards) {
 }
 
 function createCard(item, likes, userId, cardId) {
-    const card = new Card(item, likes, '#card', ownerId, userId, cardId, apiCards,
+    const card = new Card(item, likes, '#card', ownerId, userId, cardId, api,
         () => {
             popupThemeImage.open(item.name, item.link);
         });
