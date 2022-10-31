@@ -35,31 +35,21 @@ const apiOption = {
     },
 }
 
+const configValidator = {
+    inputSelector: '.popup__item',
+    submitButtonSelector: '.popup__button',
+    inactiveButtonClass: 'popup__button_disabled',
+    inputErrorClass: 'popup__item_type_error',
+    errorClass: 'popup__item-error_active'
+}
+
 const api = new Api(apiOption);
 
-const profileInfoValidator = new FormValidator({
-    inputSelector: '.popup__item',
-    submitButtonSelector: '.popup__button',
-    inactiveButtonClass: 'popup__button_disabled',
-    inputErrorClass: 'popup__item_type_error',
-    errorClass: 'popup__item-error_active'
-}, formProfileInfo);
+const profileInfoValidator = new FormValidator(configValidator, formProfileInfo);
 
-const addCardValidator = new FormValidator({
-    inputSelector: '.popup__item',
-    submitButtonSelector: '.popup__button',
-    inactiveButtonClass: 'popup__button_disabled',
-    inputErrorClass: 'popup__item_type_error',
-    errorClass: 'popup__item-error_active'
-}, formAddCard);
+const addCardValidator = new FormValidator(configValidator, formAddCard);
 
-const changePhotoValidator = new FormValidator({
-    inputSelector: '.popup__item',
-    submitButtonSelector: '.popup__button',
-    inactiveButtonClass: 'popup__button_disabled',
-    inputErrorClass: 'popup__item_type_error',
-    errorClass: 'popup__item-error_active'
-}, formEditAvatar);
+const changePhotoValidator = new FormValidator(configValidator, formEditAvatar);
 
 function setUserInfo() {
     api.getUserInfo()
@@ -118,22 +108,23 @@ const popupProfilePhoto = new PopupWithForm('.popup_theme_edit-photo', (inputsVa
 const popupThemeImage = new PopupWithImage('.popup_theme_image');
 const popupConfirmDeleting = new PopupWithConfirmation('.popup_theme_confirm', api);
 
+popupProfileInfo.setEventListeners();
+popupAddCard.setEventListeners();
+popupProfilePhoto.setEventListeners();
+
 function openPopupProfileInfo() {
     popupProfileInfo.open();
-    popupProfileInfo.setEventListeners();
     initProfileInfo();
     profileInfoValidator.resetValidation();
 }
 
 function openPopupAddCard() {
     popupAddCard.open();
-    popupAddCard.setEventListeners();
     addCardValidator.resetValidation();
 }
 
 function openPopupChangeAvatar() {
     popupProfilePhoto.open();
-    popupProfilePhoto.setEventListeners();
     changePhotoValidator.resetValidation();
 }
 

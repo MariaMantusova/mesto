@@ -24,13 +24,11 @@ export default class PopupWithConfirmation extends Popup {
             this._api.deleteCard(this._card._id)
                 .then(() => {
                     this._card.remove();
+                    this.close();
                 })
                 .catch((err) => {
                     console.log(err);
                 })
-                .finally(() => {
-                    this._popup.classList.remove('popup_opened');
-                });
         });
     }
 }
