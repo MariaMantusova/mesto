@@ -1,35 +1,19 @@
 import Popup from './Popup.js';
 
 export default class PopupWithConfirmation extends Popup {
-    constructor(popupSelector, api) {
+    constructor(popupSelector) {
         super(popupSelector);
-        this._api = api;
-        this._button =  this._popup.querySelector('.popup__button_theme_confirm');
+        this._button = this._popup.querySelector('.popup__button_theme_confirm');
     }
 
-    open(card) {
-        super.open();
-        this._card = card;
-    }
-
-    close() {
-        super.close();
-        this._card = null;
-    }
-
-    setEventListeners() {
-        super.setEventListeners();
-        this._popup.addEventListener('click', (evt) => {
+    setEventListener() {
+        this._button.addEventListener('click', (evt) => {
             evt.preventDefault();
-            this._button.setAttribute('disabled', '');
-            this._api.deleteCard(this._card._id)
-                .then(() => {
-                    this._card.remove();
-                    this.close();
-                })
-                .catch((err) => {
-                    console.log(err);
-                })
+            this._submitAction();
         });
+    }
+
+    setSubmitAction(_submitAction) {
+        this._submitAction = _submitAction;
     }
 }

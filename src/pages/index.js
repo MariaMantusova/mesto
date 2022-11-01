@@ -117,7 +117,9 @@ const popupProfilePhoto = new PopupWithForm('.popup_theme_edit-photo', (inputsVa
 });
 
 const popupThemeImage = new PopupWithImage('.popup_theme_image');
-const popupConfirmDeleting = new PopupWithConfirmation('.popup_theme_confirm', api);
+const popupConfirmDeleting = new PopupWithConfirmation('.popup_theme_confirm');
+
+popupConfirmDeleting.setEventListener();
 
 popupProfileInfo.setEventListeners();
 popupAddCard.setEventListeners();
@@ -161,15 +163,26 @@ function newSection(cards) {
 }
 
 function createCard(item, likes, userId, cardId) {
-    const card = new Card(item, likes, '#card', ownerId, userId, cardId, api,
+       const card = new Card(item, likes, '#card', ownerId, userId, cardId, api,
         () => {
             popupThemeImage.open(item.name, item.link);
         });
     card.setHandleTrashButtonClick(() => {
         buttonConfirmDeleting.removeAttribute('disabled');
-        popupConfirmDeleting.open(card);
+        buttonConfirmDeleting.textContent = 'Сохранить';
+        popupConfirmDeleting.open();
+        popupConfirmDeleting.setSubmitAction(() => {
+            buttonConfirmDeleting.setAttribute('disabled', '')
+            api.deleteCard(card._id)
+                .then(() => {
+                    card.remove();
+                    popupConfirmDeleting.close();
+                })
+                .catch(() => {
+                    errorWhileLoading(buttonConfirmDeleting);
+                })
+        })
     })
-
     return card.generateCard();
 }
 
