@@ -61,34 +61,36 @@ const popupAddCard = new PopupWithForm('.popup_theme_add-card', (inputsValues) =
     api.saveNewCard(inputsValues.name, inputsValues.link)
         .then((card) => {
             cardListAdd.addItem(createCard(inputsValues, card.likes, card.owner._id, card._id));
-        })
-        .catch((err) => console.log(err))
-        .finally(() => {
             renderLoading(false, submitAddCard);
-        });
-    popupAddCard.close();
+            closePopup(submitAddCard, popupAddCard);
+        })
+        .catch(() => {
+            errorWhileLoading(submitAddCard);
+        })
 });
 
 const changeInfo = (name, job) => {
     api.changeUserInfo(name, job)
         .then((data) => {
-            userInfo.setUserInfo(data.name, data.about)
-        })
-        .catch((err) => console.log(err))
-        .finally(() => {
+            userInfo.setUserInfo(data.name, data.about);
             renderLoading(false, submitProfileInfo);
-        });
+            closePopup(submitProfileInfo, popupProfileInfo);
+        })
+        .catch(() => {
+            errorWhileLoading(submitProfileInfo);
+        })
 }
 
 const changePhoto = (avatar) => {
     api.changeProfilePhoto(avatar)
         .then((data) => {
-            profileAvatar.src = data.avatar
-        })
-        .catch((err) => console.log(err))
-        .finally(() => {
+            profileAvatar.src = data.avatar;
             renderLoading(false, submitPopupAvatar);
-        });
+            closePopup(submitPopupAvatar, popupProfilePhoto);
+        })
+        .catch(() => {
+            errorWhileLoading(submitPopupAvatar);
+        })
 }
 
 Promise.all([api.getUserInfo(), api.getCards()])
@@ -107,13 +109,11 @@ Promise.all([api.getUserInfo(), api.getCards()])
 const popupProfileInfo = new PopupWithForm('.popup_theme_profile-info', (inputsValues) => {
     renderLoading(true, submitProfileInfo);
     changeInfo(inputsValues.name, inputsValues.job);
-    popupProfileInfo.close();
 });
 
 const popupProfilePhoto = new PopupWithForm('.popup_theme_edit-photo', (inputsValues) => {
     renderLoading(true, submitPopupAvatar);
     changePhoto(inputsValues.avatar);
-    popupProfilePhoto.close();
 });
 
 const popupThemeImage = new PopupWithImage('.popup_theme_image');
@@ -185,6 +185,16 @@ function renderLoading(isLoading, button) {
     } else {
         button.textContent = 'Сохранено';
     }
+}
+
+function closePopup(button, popup) {
+    if (button.textContent === 'Сохранено') {
+        popup.close();
+    }
+}
+
+function errorWhileLoading (button) {
+    button.textContent = 'Ошибка при сохранении';
 }
 
 function initValidation() {
