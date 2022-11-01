@@ -51,16 +51,6 @@ const addCardValidator = new FormValidator(configValidator, formAddCard);
 
 const changePhotoValidator = new FormValidator(configValidator, formEditAvatar);
 
-function setUserInfo() {
-    api.getUserInfo()
-        .then((data) => {
-            profilePhotoField.src = data.avatar;
-            profileJobField.textContent = data.about;
-            profileNameField.textContent = data.name;
-        })
-        .catch((err) => console.log(err));
-}
-
 const userInfo = new UserInfo({
     userNameSelector: '.profile__name',
     userJobSelector: '.profile__description'
@@ -79,9 +69,8 @@ const popupAddCard = new PopupWithForm('.popup_theme_add-card', (inputsValues) =
     popupAddCard.close();
 });
 
-const popupProfileInfo = new PopupWithForm('.popup_theme_profile-info', (inputsValues) => {
-    renderLoading(true, submitProfileInfo);
-    api.changeUserInfo(inputsValues.name, inputsValues.job)
+const changeInfo = (name, job) => {
+    api.changeUserInfo(name, job)
         .then((data) => {
             userInfo.setUserInfo(data.name, data.about)
         })
@@ -89,12 +78,10 @@ const popupProfileInfo = new PopupWithForm('.popup_theme_profile-info', (inputsV
         .finally(() => {
             renderLoading(false, submitProfileInfo);
         });
-    popupProfileInfo.close();
-});
+}
 
-const popupProfilePhoto = new PopupWithForm('.popup_theme_edit-photo', (inputsValues) => {
-    renderLoading(true, submitPopupAvatar);
-    api.changeProfilePhoto(inputsValues.avatar)
+const changePhoto = (avatar) => {
+    api.changeProfilePhoto(avatar)
         .then((data) => {
             profileAvatar.src = data.avatar
         })
@@ -102,6 +89,30 @@ const popupProfilePhoto = new PopupWithForm('.popup_theme_edit-photo', (inputsVa
         .finally(() => {
             renderLoading(false, submitPopupAvatar);
         });
+}
+
+Promise.all([api.getUserInfo(), api.getCards()])
+    .then((values) => {
+        const userInfo = values[0];
+        profilePhotoField.src = userInfo.avatar;
+        profileJobField.textContent = userInfo.about;
+        profileNameField.textContent = userInfo.name;
+
+        const cards = values[1];
+        cardListAdd = newSection(cards);
+        cardListAdd.renderItems();
+    })
+    .catch((err) => console.log(err))
+
+const popupProfileInfo = new PopupWithForm('.popup_theme_profile-info', (inputsValues) => {
+    renderLoading(true, submitProfileInfo);
+    changeInfo(inputsValues.name, inputsValues.job);
+    popupProfileInfo.close();
+});
+
+const popupProfilePhoto = new PopupWithForm('.popup_theme_edit-photo', (inputsValues) => {
+    renderLoading(true, submitPopupAvatar);
+    changePhoto(inputsValues.avatar);
     popupProfilePhoto.close();
 });
 
@@ -137,13 +148,6 @@ api.getUserInfo()
     .catch((err) => console.log(err));
 
 let cardListAdd;
-
-api.getCards()
-    .then((cards) => {
-        cardListAdd = newSection(cards);
-        cardListAdd.renderItems();
-    })
-    .catch((err) => console.log(err));
 
 function newSection(cards) {
     return new Section({
@@ -186,7 +190,6 @@ function initValidation() {
     changePhotoValidator.enableValidation();
 }
 
-setUserInfo();
 initValidation();
 popupThemeImage.setEventListeners();
 popupConfirmDeleting.setEventListeners();
