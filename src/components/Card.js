@@ -1,5 +1,5 @@
 export default class Card {
-    constructor(cardElement, likes, templateSelector, ownerId, userId, id, api, handleCardClick) {
+    constructor(cardElement, likes, templateSelector, ownerId, userId, id, api, handleCardClick, handleAddLike, handleRemoveLike) {
         this._name = cardElement.name;
         this._image = cardElement.link;
         this._userId = userId;
@@ -10,6 +10,8 @@ export default class Card {
         this._likes = likes;
         this._api = api;
         this._cardElement = cardElement;
+        this._handleAddLike = handleAddLike;
+        this._handleRemoveLike = handleRemoveLike;
     }
 
     setHandleTrashButtonClick(_handleTrashButtonClick) {
@@ -77,21 +79,11 @@ export default class Card {
     }
 
     _addLike() {
-        this._api.addLike(this._cardElement._id)
-            .then((card) => {
-                this._likeButton.classList.add('card__like_active');
-                this._element.querySelector('.card__like_sum').textContent = card.likes.length;
-            })
-            .catch((err) => console.log(err));
+        this._handleAddLike(this._likeButton, this._element);
     }
 
     _removeLike() {
-        this._api.deleteLike(this._cardElement._id)
-            .then((card) => {
-                this._likeButton.classList.remove('card__like_active');
-                this._element.querySelector('.card__like_sum').textContent = card.likes.length;
-            })
-            .catch((err) => console.log(err));
+        this._handleRemoveLike(this._likeButton, this._element);
     }
 
     _handleDeleteButtonClick() {

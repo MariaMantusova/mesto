@@ -163,10 +163,27 @@ function newSection(cards) {
 }
 
 function createCard(item, likes, userId, cardId) {
-       const card = new Card(item, likes, '#card', ownerId, userId, cardId, api,
+    const card = new Card(item, likes, '#card', ownerId, userId, cardId, api,
         () => {
             popupThemeImage.open(item.name, item.link);
+        },
+        (likeButton, cardElement) => {
+            api.addLike(cardId)
+                .then((card) => {
+                    likeButton.classList.add('card__like_active');
+                    cardElement.querySelector('.card__like_sum').textContent = card.likes.length;
+                })
+                .catch((err) => console.log(err));
+        },
+        (likeButton, cardElement) => {
+            api.deleteLike(cardId)
+                .then((card) => {
+                    likeButton.classList.remove('card__like_active');
+                    cardElement.querySelector('.card__like_sum').textContent = card.likes.length;
+                })
+                .catch((err) => console.log(err));
         });
+
     card.setHandleTrashButtonClick(() => {
         buttonConfirmDeleting.removeAttribute('disabled');
         buttonConfirmDeleting.textContent = 'Сохранить';
