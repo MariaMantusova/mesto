@@ -11,6 +11,9 @@ export default class PopupWithForm extends Popup {
 
     open() {
         super.open();
+    }
+
+    addButtonText() {
         this._popupButton.textContent = 'Сохранить';
     }
 

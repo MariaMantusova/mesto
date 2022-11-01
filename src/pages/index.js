@@ -125,17 +125,20 @@ popupProfilePhoto.setEventListeners();
 
 function openPopupProfileInfo() {
     popupProfileInfo.open();
+    popupProfileInfo.addButtonText();
     initProfileInfo();
     profileInfoValidator.resetValidation();
 }
 
 function openPopupAddCard() {
     popupAddCard.open();
+    popupAddCard.addButtonText()
     addCardValidator.resetValidation();
 }
 
 function openPopupChangeAvatar() {
     popupProfilePhoto.open();
+    popupProfilePhoto.addButtonText();
     changePhotoValidator.resetValidation();
 }
 
