@@ -78,12 +78,24 @@ export default class Card {
         }
     }
 
+    setLikesSum(data) {
+        this._element.querySelector('.card__like_sum').textContent = data.likes.length
+    }
+
+    addLike() {
+        this._likeButton.classList.add('card__like_active');
+    }
+
+    removeLike() {
+        this._likeButton.classList.remove('card__like_active');
+    }
+
     _addLike() {
-        this._handleAddLike(this._likeButton, this._element);
+        this._handleAddLike();
     }
 
     _removeLike() {
-        this._handleRemoveLike(this._likeButton, this._element);
+        this._handleRemoveLike();
     }
 
     _handleDeleteButtonClick() {

@@ -157,19 +157,19 @@ function createCard(item, likes, userId, cardId) {
         () => {
             popupThemeImage.open(item.name, item.link);
         },
-        (likeButton, cardElement) => {
+        () => {
             api.addLike(cardId)
-                .then((card) => {
-                    likeButton.classList.add('card__like_active');
-                    cardElement.querySelector('.card__like_sum').textContent = card.likes.length;
+                .then((cards) => {
+                    card.addLike();
+                    card.setLikesSum(cards);
                 })
                 .catch((err) => console.log(err));
         },
-        (likeButton, cardElement) => {
+        () => {
             api.deleteLike(cardId)
-                .then((card) => {
-                    likeButton.classList.remove('card__like_active');
-                    cardElement.querySelector('.card__like_sum').textContent = card.likes.length;
+                .then((cards) => {
+                    card.removeLike();
+                    card.setLikesSum(cards);
                 })
                 .catch((err) => console.log(err));
         });
