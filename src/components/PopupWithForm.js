@@ -6,11 +6,6 @@ export default class PopupWithForm extends Popup {
         this._submitForm = submitForm;
         this._inputList = Array.from(this._popup.querySelectorAll('.popup__item'));
         this._popupForm = this._popup.querySelector('.popup__form');
-        this._popupButton = this._popup.querySelector('.popup__button');
-    }
-
-    addButtonText() {
-        this._popupButton.textContent = 'Сохранить';
     }
 
     _getInputValues() {

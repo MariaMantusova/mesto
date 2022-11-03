@@ -67,7 +67,7 @@ const popupAddCard = new PopupWithForm('.popup_theme_add-card', (inputsValues) =
             errorWhileLoading(submitAddCard);
         })
         .finally(() => {
-            renderLoading(false, submitAddCard);
+            submitAddCard.textContent = 'Создать';
         })
 });
 
@@ -134,20 +134,17 @@ popupAddCard.setEventListeners();
 popupProfilePhoto.setEventListeners();
 
 function openPopupProfileInfo() {
-    popupProfileInfo.addButtonText();
     initProfileInfo();
     profileInfoValidator.resetValidation();
     popupProfileInfo.open();
 }
 
 function openPopupAddCard() {
-    popupAddCard.addButtonText()
     addCardValidator.resetValidation();
     popupAddCard.open();
 }
 
 function openPopupChangeAvatar() {
-    popupProfilePhoto.addButtonText();
     changePhotoValidator.resetValidation();
     popupProfilePhoto.open();
 }
