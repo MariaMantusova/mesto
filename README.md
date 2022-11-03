@@ -23,4 +23,3 @@
 * Валидация с помощью JS
 * Подключение к Webpack
 * [Ссылка на сайт](https://mariamantusova.github.io/mesto/)
-* [Ссылка на сайт](https://mariamantusova.github.io/mesto/)
