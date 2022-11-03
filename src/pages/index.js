@@ -104,8 +104,7 @@ Promise.all([api.getUserInfo(), api.getCards()])
         ownerId = userInfo._id
 
         const cards = values[1];
-        cardListAdd = newSection(cards);
-        cardListAdd.renderItems();
+        cardListAdd.renderItems(cards);
     })
     .catch((err) => console.log(err))
 
@@ -147,15 +146,11 @@ function openPopupChangeAvatar() {
     popupProfilePhoto.open();
 }
 
-let cardListAdd;
-
-function newSection(cards) {
-    return new Section({
-        data: cards, renderer: ((item) => {
-            cardListAdd.addItem(createCard(item, item.likes, item.owner._id, item._id));
-        })
-    }, '.cards');
-}
+let cardListAdd =  new Section({
+    renderer: ((item) => {
+        cardListAdd.addItem(createCard(item, item.likes, item.owner._id, item._id));
+    })
+}, '.cards');
 
 function createCard(item, likes, userId, cardId) {
     const card = new Card(item, likes, '#card', ownerId, userId, cardId, api,
