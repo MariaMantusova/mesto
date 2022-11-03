@@ -57,7 +57,7 @@ export default class Api {
     }
 
     saveNewCard(name, link) {
-        return fetch(`${this._url}/cards`, {
+        return fetch(`${this._url}/cads`, {
             method: 'POST',
             headers: this._header,
             body: JSON.stringify({

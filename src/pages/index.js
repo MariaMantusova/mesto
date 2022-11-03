@@ -61,11 +61,13 @@ const popupAddCard = new PopupWithForm('.popup_theme_add-card', (inputsValues) =
     api.saveNewCard(inputsValues.name, inputsValues.link)
         .then((card) => {
             cardListAdd.addItem(createCard(inputsValues, card.likes, card.owner._id, card._id));
-            renderLoading(false, submitAddCard);
-            closePopup(submitAddCard, popupAddCard);
+            popupAddCard.close();
         })
         .catch(() => {
             errorWhileLoading(submitAddCard);
+        })
+        .finally(() => {
+            renderLoading(false, submitAddCard);
         })
 });
 
@@ -73,11 +75,13 @@ const changeInfo = (name, job) => {
     api.changeUserInfo(name, job)
         .then((data) => {
             userInfo.setUserInfo(data.name, data.about);
-            renderLoading(false, submitProfileInfo);
-            closePopup(submitProfileInfo, popupProfileInfo);
+            popupProfileInfo.close();
         })
         .catch(() => {
             errorWhileLoading(submitProfileInfo);
+        })
+        .finally(() => {
+            renderLoading(false, submitProfileInfo);
         })
 }
 
@@ -85,12 +89,14 @@ const changePhoto = (avatar) => {
     api.changeProfilePhoto(avatar)
         .then((data) => {
             profileAvatar.src = data.avatar;
-            renderLoading(false, submitPopupAvatar);
-            closePopup(submitPopupAvatar, popupProfilePhoto);
+            popupProfilePhoto.close();
         })
         .catch(() => {
             errorWhileLoading(submitPopupAvatar);
         })
+        .finally(() => {
+            renderLoading(false, submitPopupAvatar);
+        });
 }
 
 let ownerId;
@@ -176,7 +182,7 @@ function createCard(item, likes, userId, cardId) {
 
     card.setHandleTrashButtonClick(() => {
         buttonConfirmDeleting.removeAttribute('disabled');
-        buttonConfirmDeleting.textContent = 'Сохранить';
+        buttonConfirmDeleting.textContent = 'Да';
         popupConfirmDeleting.open();
         popupConfirmDeleting.setSubmitAction(() => {
             buttonConfirmDeleting.setAttribute('disabled', '')
@@ -203,13 +209,7 @@ function renderLoading(isLoading, button) {
     if (isLoading) {
         button.textContent = 'Сохранение...';
     } else {
-        button.textContent = 'Сохранено';
-    }
-}
-
-function closePopup(button, popup) {
-    if (button.textContent === 'Сохранено') {
-        popup.close();
+        button.textContent = 'Сохранить';
     }
 }
 
