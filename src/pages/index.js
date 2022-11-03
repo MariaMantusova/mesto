@@ -93,12 +93,15 @@ const changePhoto = (avatar) => {
         })
 }
 
+let ownerId;
+
 Promise.all([api.getUserInfo(), api.getCards()])
     .then((values) => {
         const userInfo = values[0];
         profilePhotoField.src = userInfo.avatar;
         profileJobField.textContent = userInfo.about;
         profileNameField.textContent = userInfo.name;
+        ownerId = userInfo._id
 
         const cards = values[1];
         cardListAdd = newSection(cards);
@@ -126,31 +129,23 @@ popupAddCard.setEventListeners();
 popupProfilePhoto.setEventListeners();
 
 function openPopupProfileInfo() {
-    popupProfileInfo.open();
     popupProfileInfo.addButtonText();
     initProfileInfo();
     profileInfoValidator.resetValidation();
+    popupProfileInfo.open();
 }
 
 function openPopupAddCard() {
-    popupAddCard.open();
     popupAddCard.addButtonText()
     addCardValidator.resetValidation();
+    popupAddCard.open();
 }
 
 function openPopupChangeAvatar() {
-    popupProfilePhoto.open();
     popupProfilePhoto.addButtonText();
     changePhotoValidator.resetValidation();
+    popupProfilePhoto.open();
 }
-
-let ownerId;
-
-api.getUserInfo()
-    .then((data) => {
-        ownerId = data._id
-    })
-    .catch((err) => console.log(err));
 
 let cardListAdd;
 
